@@ -8,25 +8,6 @@
     {
       "id": "acc-s1",
       "number": 1,
-      "name": "Aspirational Gold Tier Preview",
-      "principle": "status",
-      "subPrinciple": "inspiring-aspiration",
-      "supportingSubPrinciple": "aspirational-marketing",
-      "description": "Previews exclusive benefits (Personal Styling Assistant & Private Lounge Invites) unlocked upon reaching Elite Gold rank.",
-      "rationale": "The premium tier gives the user an aspirational future identity and shows what higher status could unlock, motivating progression while keeping the path visible and realistic.",
-      "businessValue": "+33% upsell engagement.",
-      "implementationNotes": "Interactive preview modal showing Gold-only benefits and perks.",
-      "ethicalGuardrail": "Ensure previewed higher-tier benefits are genuinely delivered and that the path to reach them remains transparent and fair.",
-      "target": {
-        "dataAttribute": "account-gold-preview",
-        "css": ".aspirational-tier-banner",
-        "text": { "value": "Preview Elite Gold Privileges", "tag": "div" },
-        "preferredSide": "right"
-      }
-    },
-    {
-      "id": "acc-s2",
-      "number": 2,
       "name": "VIP Concierge Priority Channel",
       "principle": "status",
       "subPrinciple": "customer-importance",
@@ -44,8 +25,8 @@
       }
     },
     {
-      "id": "acc-s3",
-      "number": 3,
+      "id": "acc-s2",
+      "number": 2,
       "name": "Double Tier Points Event Banner",
       "principle": "status",
       "subPrinciple": "payment-vs-achievement",
@@ -60,6 +41,25 @@
         "dataAttribute": "account-double-points",
         "css": ".double-tier-event-card",
         "text": { "value": "⚡ 2X TIER CREDITS ACTIVE (Ends in 18h)", "tag": "div" },
+        "preferredSide": "right"
+      }
+    },
+    {
+      "id": "acc-s3",
+      "number": 3,
+      "name": "Aspirational Gold Tier Preview",
+      "principle": "status",
+      "subPrinciple": "inspiring-aspiration",
+      "supportingSubPrinciple": "aspirational-marketing",
+      "description": "Previews exclusive benefits (Personal Styling Assistant & Private Lounge Invites) unlocked upon reaching Elite Gold rank.",
+      "rationale": "The premium tier gives the user an aspirational future identity and shows what higher status could unlock, motivating progression while keeping the path visible and realistic.",
+      "businessValue": "+33% upsell engagement.",
+      "implementationNotes": "Interactive preview modal showing Gold-only benefits and perks.",
+      "ethicalGuardrail": "Ensure previewed higher-tier benefits are genuinely delivered and that the path to reach them remains transparent and fair.",
+      "target": {
+        "dataAttribute": "account-gold-preview",
+        "css": ".aspirational-tier-banner",
+        "text": { "value": "Preview Elite Gold Privileges", "tag": "div" },
         "preferredSide": "right"
       }
     }

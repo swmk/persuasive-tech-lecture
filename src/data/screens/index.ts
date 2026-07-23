@@ -11,24 +11,6 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
       {
         id: 'home-c1',
         number: 1,
-        name: '1-Click Instant Express Buy',
-        principle: 'convenience',
-        subPrinciple: 'shortest-path',
-        description: 'Bypasses traditional cart and checkout pages, allowing authenticated users to complete purchases in a single click.',
-        rationale: 'Eliminates friction and decision fatigue by reducing a multi-step checkout funnel down to one immediate, single-action trigger.',
-        businessValue: '+22% higher conversion on impulse and repeat purchases.',
-        implementationNotes: 'Requires saved payment tokenization (Apple Pay / One-Touch) with an obligatory 15-second instant undo window.',
-        ethicalGuardrail: 'Always display total price clearly with taxes and provide an accessible 15-second order cancellation mechanism.',
-        target: {
-          dataAttribute: 'home-express-buy',
-          css: '.express-buy-btn',
-          text: { value: '1-Click Express Buy', tag: 'button' },
-          preferredSide: 'right'
-        }
-      },
-      {
-        id: 'home-c2',
-        number: 2,
         name: 'Smart Preselected Shipping Address',
         principle: 'convenience',
         subPrinciple: 'smart-defaults',
@@ -45,8 +27,8 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
         }
       },
       {
-        id: 'home-c3',
-        number: 3,
+        id: 'home-c2',
+        number: 2,
         name: 'Resume Previous Shopping Session',
         principle: 'convenience',
         subPrinciple: 'resume-not-restart',
@@ -58,6 +40,24 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'home-resume-banner',
           css: '.resume-session-bar',
           text: { value: 'Welcome back, Stephen! You have 2 items in your cart', tag: 'div' },
+          preferredSide: 'right'
+        }
+      },
+      {
+        id: 'home-c3',
+        number: 3,
+        name: '1-Click Instant Express Buy',
+        principle: 'convenience',
+        subPrinciple: 'shortest-path',
+        description: 'Bypasses traditional cart and checkout pages, allowing authenticated users to complete purchases in a single click.',
+        rationale: 'Eliminates friction and decision fatigue by reducing a multi-step checkout funnel down to one immediate, single-action trigger.',
+        businessValue: '+22% higher conversion on impulse and repeat purchases.',
+        implementationNotes: 'Requires saved payment tokenization (Apple Pay / One-Touch) with an obligatory 15-second instant undo window.',
+        ethicalGuardrail: 'Always display total price clearly with taxes and provide an accessible 15-second order cancellation mechanism.',
+        target: {
+          dataAttribute: 'home-express-buy',
+          css: '.express-buy-btn',
+          text: { value: '1-Click Express Buy', tag: 'button' },
           preferredSide: 'right'
         }
       }
@@ -634,23 +634,6 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
       {
         id: 'cart-l1',
         number: 1,
-        name: 'Free Shipping Threshold Progress Rail',
-        principle: 'loss-avoidance',
-        subPrinciple: 'progress-preservation',
-        description: 'Visual progress bar indicating distance remaining to unlock free express shipping.',
-        rationale: 'Leverages goal-gradient effects; users want to preserve accumulated progress and avoid paying shipping fees.',
-        businessValue: '+31% item add-on rate near threshold amounts.',
-        implementationNotes: 'Updates dynamically whenever cart item quantities are modified.',
-        target: {
-          dataAttribute: 'cart-shipping-progress',
-          css: '.shipping-progress-card',
-          text: { value: 'Add $21.00 more to unlock FREE Express Delivery', tag: 'div' },
-          preferredSide: 'right'
-        }
-      },
-      {
-        id: 'cart-l2',
-        number: 2,
         name: 'Temporary Cart Reservation Timer',
         principle: 'loss-avoidance',
         subPrinciple: 'time-scarcity',
@@ -663,6 +646,23 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'cart-hold-timer',
           css: '.cart-reservation-banner',
           text: { value: 'Cart Reserved: Items held for 08:42', tag: 'div' },
+          preferredSide: 'right'
+        }
+      },
+      {
+        id: 'cart-l2',
+        number: 2,
+        name: 'Free Shipping Threshold Progress Rail',
+        principle: 'loss-avoidance',
+        subPrinciple: 'progress-preservation',
+        description: 'Visual progress bar indicating distance remaining to unlock free express shipping.',
+        rationale: 'Leverages goal-gradient effects; users want to preserve accumulated progress and avoid paying shipping fees.',
+        businessValue: '+31% item add-on rate near threshold amounts.',
+        implementationNotes: 'Updates dynamically whenever cart item quantities are modified.',
+        target: {
+          dataAttribute: 'cart-shipping-progress',
+          css: '.shipping-progress-card',
+          text: { value: 'Add $21.00 more to unlock FREE Express Delivery', tag: 'div' },
           preferredSide: 'right'
         }
       },
@@ -807,6 +807,23 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
       {
         id: 'chk-c1',
         number: 1,
+        name: 'Collapsible Order Summary Drawer',
+        principle: 'convenience',
+        subPrinciple: 'progressive-disclosure',
+        description: 'Collapses item detail breakdown into an expandable drawer to keep checkout UI clean.',
+        rationale: 'Keeps final pay button visible above fold on mobile screens.',
+        businessValue: 'Improves mobile conversion completion.',
+        implementationNotes: 'Expandable drawer toggle with responsive height animation.',
+        target: {
+          dataAttribute: 'checkout-summary-drawer',
+          css: '.summary-disclosure-toggle',
+          text: { value: 'Order Total: $1,299.00 (Show Details)', tag: 'div' },
+          preferredSide: 'right'
+        }
+      },
+      {
+        id: 'chk-c2',
+        number: 2,
         name: 'Express Biometric One-Touch Payment',
         principle: 'convenience',
         subPrinciple: 'shortest-path',
@@ -822,8 +839,8 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
         }
       },
       {
-        id: 'chk-c2',
-        number: 2,
+        id: 'chk-c3',
+        number: 3,
         name: 'Default Billing & Shipping Sync',
         principle: 'convenience',
         subPrinciple: 'smart-defaults',
@@ -835,23 +852,6 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'checkout-billing-sync',
           css: '.sync-address-checkbox',
           text: { value: 'Billing address matches shipping destination', tag: 'div' },
-          preferredSide: 'right'
-        }
-      },
-      {
-        id: 'chk-c3',
-        number: 3,
-        name: 'Collapsible Order Summary Drawer',
-        principle: 'convenience',
-        subPrinciple: 'progressive-disclosure',
-        description: 'Collapses item detail breakdown into an expandable drawer to keep checkout UI clean.',
-        rationale: 'Keeps final pay button visible above fold on mobile screens.',
-        businessValue: 'Improves mobile conversion completion.',
-        implementationNotes: 'Expandable drawer toggle with responsive height animation.',
-        target: {
-          dataAttribute: 'checkout-summary-drawer',
-          css: '.summary-disclosure-toggle',
-          text: { value: 'Order Total: $1,299.00 (Show Details)', tag: 'div' },
           preferredSide: 'right'
         }
       }
@@ -1052,25 +1052,6 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
       {
         id: 'acc-s1',
         number: 1,
-        name: 'Aspirational Gold Tier Preview',
-        principle: 'status',
-        subPrinciple: 'inspiring-aspiration',
-        supportingSubPrinciple: 'aspirational-marketing',
-        description: 'Previews exclusive benefits (Personal Styling Assistant & Private Lounge Invites) unlocked upon reaching Elite Gold rank.',
-        rationale: 'The premium tier gives the user an aspirational future identity and shows what higher status could unlock, motivating progression while keeping the path visible and realistic.',
-        businessValue: '+33% upsell engagement.',
-        implementationNotes: 'Interactive preview modal showing Gold-only benefits and perks.',
-        ethicalGuardrail: 'Ensure previewed higher-tier benefits are genuinely delivered and that the path to reach them remains transparent and fair.',
-        target: {
-          dataAttribute: 'account-gold-preview',
-          css: '.aspirational-tier-banner',
-          text: { value: 'Preview Elite Gold Privileges', tag: 'div' },
-          preferredSide: 'right'
-        }
-      },
-      {
-        id: 'acc-s2',
-        number: 2,
         name: 'VIP Concierge Priority Channel',
         principle: 'status',
         subPrinciple: 'customer-importance',
@@ -1088,8 +1069,8 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
         }
       },
       {
-        id: 'acc-s3',
-        number: 3,
+        id: 'acc-s2',
+        number: 2,
         name: 'Double Tier Points Event Banner',
         principle: 'status',
         subPrinciple: 'payment-vs-achievement',
@@ -1104,6 +1085,25 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'account-double-points',
           css: '.double-tier-event-card',
           text: { value: '⚡ 2X TIER CREDITS ACTIVE (Ends in 18h)', tag: 'div' },
+          preferredSide: 'right'
+        }
+      },
+      {
+        id: 'acc-s3',
+        number: 3,
+        name: 'Aspirational Gold Tier Preview',
+        principle: 'status',
+        subPrinciple: 'inspiring-aspiration',
+        supportingSubPrinciple: 'aspirational-marketing',
+        description: 'Previews exclusive benefits (Personal Styling Assistant & Private Lounge Invites) unlocked upon reaching Elite Gold rank.',
+        rationale: 'The premium tier gives the user an aspirational future identity and shows what higher status could unlock, motivating progression while keeping the path visible and realistic.',
+        businessValue: '+33% upsell engagement.',
+        implementationNotes: 'Interactive preview modal showing Gold-only benefits and perks.',
+        ethicalGuardrail: 'Ensure previewed higher-tier benefits are genuinely delivered and that the path to reach them remains transparent and fair.',
+        target: {
+          dataAttribute: 'account-gold-preview',
+          css: '.aspirational-tier-banner',
+          text: { value: 'Preview Elite Gold Privileges', tag: 'div' },
           preferredSide: 'right'
         }
       }
