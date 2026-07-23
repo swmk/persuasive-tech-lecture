@@ -1,0 +1,6 @@
+{
+  "name": "Persuasive Technology Lecture Deck",
+  "description": "An interactive university-grade HCI lecture deck exploring Convenience, Loss Avoidance, and Status persuasive UI patterns.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
