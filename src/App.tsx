@@ -10,6 +10,7 @@ import { ScreenSlide } from './components/ScreenSlide';
 import { SpeakerModeModal } from './components/SpeakerModeModal';
 import { DiagnosticsModal } from './components/DiagnosticsModal';
 import { ThumbnailOverviewModal } from './components/ThumbnailOverviewModal';
+import { LaserPointer } from './components/LaserPointer';
 
 export default function App() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -22,6 +23,7 @@ export default function App() {
   const [isDiagnosticsOpen, setIsDiagnosticsOpen] = useState(false);
   const [isOverviewOpen, setIsOverviewOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isLaserActive, setIsLaserActive] = useState(false);
 
   const slides = DECK_CONFIG.slides;
   const currentSlide = slides[currentSlideIndex];
@@ -140,6 +142,10 @@ export default function App() {
         case 'C':
           setShowCallouts(prev => !prev);
           break;
+        case 'l':
+        case 'L':
+          setIsLaserActive(prev => !prev);
+          break;
         case 'n':
         case 'N':
           setShowSpeakerNotes(prev => !prev);
@@ -199,9 +205,14 @@ export default function App() {
         onToggleFullscreen={toggleFullscreen}
         showCallouts={showCallouts}
         onToggleCallouts={() => setShowCallouts(prev => !prev)}
+        isLaserActive={isLaserActive}
+        onToggleLaser={() => setIsLaserActive(prev => !prev)}
         isDarkMode={isDarkMode}
         onToggleDarkMode={() => setIsDarkMode(prev => !prev)}
       />
+
+      {/* Laser Pointer Overlay */}
+      <LaserPointer active={isLaserActive} />
 
       {/* Main Slide Presentation Stage */}
       <main className="flex-1 flex overflow-hidden relative">

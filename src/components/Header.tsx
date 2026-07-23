@@ -11,6 +11,8 @@ interface HeaderProps {
   onToggleFullscreen: () => void;
   showCallouts: boolean;
   onToggleCallouts: () => void;
+  isLaserActive: boolean;
+  onToggleLaser: () => void;
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
 }
@@ -25,6 +27,8 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleFullscreen,
   showCallouts,
   onToggleCallouts,
+  isLaserActive,
+  onToggleLaser,
   isDarkMode,
   onToggleDarkMode
 }) => {
@@ -51,6 +55,19 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div className="flex items-center gap-2">
+        <button
+          onClick={onToggleLaser}
+          title="Toggle Laser Pointer [L]"
+          className={`px-3 py-1.5 text-[10px] uppercase font-bold tracking-wider border transition-all flex items-center gap-1.5 ${
+            isLaserActive
+              ? 'bg-red-600 text-white border-red-500 shadow-[0_0_10px_#ff0000]'
+              : 'border-white/20 text-white/70 hover:bg-white/10'
+          }`}
+        >
+          <span className={`w-2 h-2 rounded-full ${isLaserActive ? 'bg-white animate-ping' : 'bg-red-500'}`} />
+          Laser [L]
+        </button>
+
         <button
           onClick={onToggleCallouts}
           title="Toggle Callout Overlays [C]"
