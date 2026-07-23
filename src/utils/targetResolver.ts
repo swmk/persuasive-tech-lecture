@@ -87,38 +87,21 @@ export function resolveFeatureTarget(
 
     result.boundingClientRect = relativeRect;
 
-    // Compute optimal callout position
-    const preferredSide = feature.target.preferredSide || 'right';
-    let posX = 0;
-    let posY = 0;
+    // Compute callout position - always aligned on the right edge of the screen
+    const containerW = containerRect.width || 600;
+    const containerH = containerRect.height || 500;
 
-    switch (preferredSide) {
-      case 'right':
-        posX = relativeRect.left + relativeRect.width + 12;
-        posY = relativeRect.top + relativeRect.height / 2 - 16;
-        break;
-      case 'left':
-        posX = relativeRect.left - 40;
-        posY = relativeRect.top + relativeRect.height / 2 - 16;
-        break;
-      case 'top':
-        posX = relativeRect.left + relativeRect.width / 2 - 16;
-        posY = relativeRect.top - 40;
-        break;
-      case 'bottom':
-        posX = relativeRect.left + relativeRect.width / 2 - 16;
-        posY = relativeRect.top + relativeRect.height + 12;
-        break;
-    }
+    // Place callouts on the right margin of the mockup screen container
+    const posX = containerW - 20;
+    const posY = relativeRect.top + relativeRect.height / 2;
 
-    // Clamp to viewport boundary (assuming 600px x 500px container bounds)
-    const clampedX = Math.max(10, Math.min(posX, 560));
-    const clampedY = Math.max(10, Math.min(posY, 460));
+    // Clamp Y to stay cleanly within top and bottom padding of the container
+    const clampedY = Math.max(20, Math.min(posY, containerH - 20));
 
     result.computedPosition = {
-      x: clampedX,
+      x: posX,
       y: clampedY,
-      side: preferredSide
+      side: 'right'
     };
   } else {
     result.errorDetails = `Failed to resolve target for callout #${feature.number} (${feature.id}). Attempted dataAttr: "${feature.target.dataAttribute}", CSS: "${feature.target.css}", Text: "${feature.target.text?.value}".`;

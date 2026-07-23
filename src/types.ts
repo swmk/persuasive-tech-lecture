@@ -12,6 +12,8 @@ export interface SubPrinciple {
   label: string;
   definition: string;
   featureExamples: string[];
+  patterns?: string[];
+  ethicalConsiderations?: string[];
 }
 
 export interface PrincipleDefinition {
@@ -42,6 +44,8 @@ export interface FeatureAnnotation {
   name: string;
   principle: PrincipleId;
   subPrinciple: string;
+  supportingSubPrinciple?: string;
+  supportingPrinciple?: PrincipleId;
   description: string;
   rationale: string;
   businessValue: string;

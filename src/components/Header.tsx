@@ -34,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
           <span className="text-xs tracking-widest uppercase text-amber-500 font-bold font-mono">
-            HCI 402: Persuasive Tech
+            Persuasive Tech
           </span>
         </div>
         <div className="h-4 w-px bg-white/20"></div>

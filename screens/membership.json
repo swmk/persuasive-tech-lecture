@@ -1,0 +1,65 @@
+{
+  "id": "membership",
+  "title": "VIP Membership Lounge",
+  "subtitle": "A Visible Status Ladder",
+  "principle": "status",
+  "speakerNotes": "On Slide 7, we examine the Status principle. The current Silver tier establishes a visible status difference through a named rank and badge. The progress bar demonstrates Reward and Achievement Structures by showing accumulated progress and the exact remaining distance to Gold. This turns aspiration into a realistic, actionable goal while preserving a constructive, transparent path forward.",
+  "features": [
+    {
+      "id": "vip-s1",
+      "number": 1,
+      "name": "Elite Silver Tier Badge Identity",
+      "principle": "status",
+      "subPrinciple": "status-differences",
+      "description": "Displays active VIP tier status with metallic badge styling and member serial ID, making position in the hierarchy visible.",
+      "rationale": "The named Silver tier and badge establish a visible status difference, making the member's position in the hierarchy clear, transparent, and recognizable.",
+      "businessValue": "Drives 2.4x higher repeat brand engagement through recognized rank.",
+      "implementationNotes": "Includes metallic badge styling and member tier level.",
+      "ethicalGuardrail": "Make tier requirements and benefit differences transparent without portraying lower tiers as inferior.",
+      "target": {
+        "dataAttribute": "vip-tier-badge",
+        "css": ".current-tier-card",
+        "text": { "value": "ELITE SILVER MEMBER", "tag": "div" },
+        "preferredSide": "right"
+      }
+    },
+    {
+      "id": "vip-s2",
+      "number": 2,
+      "name": "Ladder Spend Progress to Elite Gold",
+      "principle": "status",
+      "subPrinciple": "reward-achievement",
+      "supportingSubPrinciple": "inspiring-aspiration",
+      "description": "Visual progress bar displaying current spend ($650 / $1,000) and remaining distance ($350) toward unlocking Elite Gold status.",
+      "rationale": "Connects continued spending to incremental progress. Showing progress already achieved and a realistic remaining distance to Gold turns a vague aspiration into an actionable goal.",
+      "businessValue": "Increases customer spend trajectory toward tier unlocks by 29%.",
+      "implementationNotes": "Shows exact remaining spend amount required to reach Gold.",
+      "ethicalGuardrail": "Tier requirements and qualifying thresholds must be transparent, attainable, and designed not to encourage harmful or unaffordable overspending.",
+      "target": {
+        "dataAttribute": "vip-tier-ladder",
+        "css": ".tier-progress-track",
+        "text": { "value": "$350.00 spend remaining to reach Elite Gold", "tag": "div" },
+        "preferredSide": "right"
+      }
+    },
+    {
+      "id": "vip-s3",
+      "number": 3,
+      "name": "Unlocked Member Privilege Checklist",
+      "principle": "status",
+      "subPrinciple": "status-differences",
+      "supportingSubPrinciple": "customer-importance",
+      "description": "Displays unlocked perks (Free Express Shipping, Early Flash Drop Access, 1.5x Points Multiplier, 24/7 VIP Chat Queue).",
+      "rationale": "The benefits demonstrate that the member's tier provides tangible privileges rather than only a decorative label, validating current rank.",
+      "businessValue": "+40% loyalty program satisfaction score.",
+      "implementationNotes": "Checklist renders active unlocked badges dynamically per member level.",
+      "ethicalGuardrail": "Ensure status benefits are real, accurately described, and consistently delivered.",
+      "target": {
+        "dataAttribute": "vip-benefits-grid",
+        "css": ".unlocked-perks-list",
+        "text": { "value": "Active Silver Tier Privileges", "tag": "div" },
+        "preferredSide": "right"
+      }
+    }
+  ]
+}

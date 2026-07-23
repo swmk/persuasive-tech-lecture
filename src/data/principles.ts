@@ -128,40 +128,199 @@ export const PRINCIPLES_DATA: Record<string, PrincipleDefinition> = {
     },
     subPrinciples: [
       {
-        id: 'visible-rank',
-        label: 'Visible Rank',
-        definition: 'Show the user\'s current tier or level clearly.',
-        featureExamples: ['Elite Silver badge', 'Member identity card']
+        id: 'aspirational-marketing',
+        label: 'Creating Desire Through Aspirational Marketing',
+        definition: 'Make the product, membership or higher tier feel desirable before asking the user to pursue it.',
+        patterns: [
+          'Secrecy and hype',
+          'Scarcity and exclusivity',
+          'Identity and association',
+          'Premium aesthetics and design',
+          'Functionality and uniqueness'
+        ],
+        featureExamples: [
+          'Elite-only products',
+          'Premium visual design',
+          'Platinum lifestyle imagery',
+          'Exclusive member collections',
+          'Limited-edition products',
+          'Member-only launches'
+        ]
       },
       {
-        id: 'climbing-the-ladder',
-        label: 'Climbing the Ladder',
-        definition: 'Show the current position, next tier and remaining distance.',
-        featureExamples: ['Progress to Elite Gold', 'Tier progress bar']
+        id: 'inspiring-aspiration',
+        label: 'Inspiring Aspiration Through Status',
+        definition: 'Show users what higher status looks like and how their future experience could improve.',
+        patterns: [
+          'Aspirational imagery',
+          'Lifestyle branding',
+          'Realistic and attainable goals'
+        ],
+        featureExamples: [
+          'Previewing Elite Platinum benefits',
+          'Showing the lifestyle or privileges associated with higher tiers',
+          'Presenting the next tier as achievable',
+          'Comparing current and future benefits positively'
+        ]
       },
       {
-        id: 'exclusive-access',
-        label: 'Exclusive Access',
-        definition: 'Translate status into differentiated access or privileges.',
-        featureExamples: ['Elite-only deals', 'Early access', 'VIP support']
+        id: 'pre-ownership',
+        label: 'Pre-Ownership',
+        definition: 'Create emotional investment and insider identity before the user fully owns the product, service or status.',
+        patterns: [
+          'Early access and betas',
+          'Pre-orders',
+          'Wishlists',
+          'Insider communication',
+          'Membership previews',
+          'Sneak peeks'
+        ],
+        featureExamples: [
+          'Elite members receiving early access',
+          'Adding premium items to a wishlist',
+          'Joining a waitlist',
+          'Previewing upcoming Elite benefits',
+          'Member-exclusive product previews'
+        ]
       },
       {
-        id: 'aspirational-identity',
-        label: 'Aspirational Identity',
-        definition: 'Preview an attractive higher-tier identity and its benefits.',
-        featureExamples: ['Elite Platinum preview', 'Premium tier card']
+        id: 'status-differences',
+        label: 'Establishing Status Differences',
+        definition: 'Make the difference between membership levels, achievements or access rights visible and understandable.',
+        patterns: [
+          'Tiered rewards and badges',
+          'Visible ranks',
+          'Member-only privileges',
+          'Social proof',
+          'Community recognition',
+          'Public celebrations'
+        ],
+        featureExamples: [
+          'Elite Silver, Elite Gold and Elite Platinum badges',
+          'Tier badges',
+          'Exclusive deals',
+          'Different benefits by tier',
+          'Priority service',
+          'Premium shipping',
+          'VIP access'
+        ]
       },
       {
-        id: 'benefit-validation',
-        label: 'Benefit Validation',
-        definition: 'Demonstrate that the current rank already delivers real value.',
-        featureExamples: ['Unlocked benefit checklist', 'Free express shipping']
+        id: 'reward-achievement',
+        label: 'Reward and Achievement Structures',
+        definition: 'Connect continued behaviour to incremental progress, milestones and rewards.',
+        patterns: [
+          'Points',
+          'Badges',
+          'Progress bars',
+          'Regular rewards',
+          'Initial head starts',
+          'Shared goals'
+        ],
+        featureExamples: [
+          'Progress to Elite Gold',
+          'Membership points',
+          'Percentage completed',
+          'Remaining spend to the next tier',
+          'Unlocked benefits',
+          'Tier milestones',
+          'Bonus progress'
+        ]
+      },
+      {
+        id: 'payment-vs-achievement',
+        label: 'Payment Versus Achievement',
+        definition: 'Allow users to attain or accelerate status through spending, payment or achievement, while keeping the distinction transparent and fair.',
+        patterns: [
+          'Paid upgrades',
+          'Buying points',
+          'Spending-based tier progress',
+          'Accelerated status',
+          'Membership fees',
+          'Bonus tier credits'
+        ],
+        featureExamples: [
+          'Spend $200 to receive double Elite credits',
+          'Paid premium membership',
+          'Spending thresholds that contribute to tier status',
+          'Purchasing additional points',
+          'Tier accelerators'
+        ],
+        ethicalConsiderations: [
+          'Explanations must acknowledge fairness.',
+          'Clearly explain what can be earned, what can be purchased, and what can be accelerated.'
+        ]
+      },
+      {
+        id: 'public-status-display',
+        label: 'Encouraging Public Status Displays',
+        definition: 'Allow users to visibly display their rank, achievements or exclusive access.',
+        patterns: [
+          'Profile badges',
+          'Member titles',
+          'Shareable achievements',
+          'Public recognition',
+          'Exclusive physical or digital symbols',
+          'User-generated content'
+        ],
+        featureExamples: [
+          'Elite badge beside the user\'s name',
+          'Shareable Gold or Platinum achievement',
+          'Member profile insignia',
+          'Exclusive member card',
+          'VIP luggage tag or digital emblem'
+        ]
+      },
+      {
+        id: 'customer-importance',
+        label: 'Making Customers Feel Important',
+        definition: 'Recognise and elevate customers so they feel valued by the platform.',
+        patterns: [
+          'Personalised recognition',
+          'Milestone celebrations',
+          'Featured contributions',
+          'Surprise rewards',
+          'Advisory or insider roles',
+          'Platform influence'
+        ],
+        featureExamples: [
+          'Congratulations on reaching Elite Gold',
+          'Thank-you for the tenth purchase',
+          'Surprise shipping upgrade',
+          'Personalised member recognition',
+          'Invitation to preview new products',
+          'VIP customer feedback group'
+        ]
+      },
+      {
+        id: 'ethical-status-design',
+        label: 'Ethical Status Design',
+        definition: 'Keep status aspirational, attainable and constructive.',
+        patterns: [
+          'Emphasise positive aspiration rather than humiliation',
+          'Provide realistic incremental goals',
+          'Give newcomers a visible path forward',
+          'Use exclusivity carefully',
+          'Avoid portraying non-members or lower tiers as inferior',
+          'Preserve fairness between users who earn status and users who pay for it',
+          'Explain tier requirements and benefits clearly',
+          'Avoid encouraging unaffordable or harmful spending',
+          'Encourage cooperation where appropriate'
+        ],
+        featureExamples: [
+          'Transparent tier requirements',
+          'Realistic incremental goals',
+          'Clear spend multipliers',
+          'Fairness between earned and paid status'
+        ]
       }
     ],
     ethicalGuardrails: [
-      'Make tier requirements and benefit differences transparent.',
-      'Do not make lower tiers feel intentionally devalued.',
-      'Ensure status benefits are real and consistently delivered.'
+      'Emphasise positive aspiration rather than humiliation or devaluation.',
+      'Provide realistic incremental goals and give newcomers a visible path forward.',
+      'Avoid portraying non-members or lower tiers as inferior.',
+      'Preserve fairness between users who earn status and users who pay for or accelerate it.',
+      'Explain tier requirements, multipliers and benefits clearly, avoiding encouraging unaffordable or harmful spending.'
     ]
   }
 };

@@ -13,7 +13,7 @@ export const TitleSlide: React.FC<TitleSlideProps> = ({ onStart }) => {
       <div className="max-w-5xl mx-auto w-full my-auto flex flex-col gap-10 z-10">
         <div>
           <div className="inline-flex items-center gap-3 px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-500 text-xs font-bold font-mono uppercase tracking-widest rounded-full mb-6">
-            <span>HCI 402 • University UX Masterclass</span>
+            <span>Interactive UX Masterclass</span>
           </div>
           <h1 className="text-5xl lg:text-6xl font-serif italic text-white tracking-tight leading-tight">
             Persuasive Technology in E-Commerce
@@ -51,16 +51,7 @@ export const TitleSlide: React.FC<TitleSlideProps> = ({ onStart }) => {
           ))}
         </div>
 
-        <div className="flex items-center justify-between pt-6 border-t border-white/10">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-amber-500 text-black font-serif italic font-bold flex items-center justify-center text-lg">
-              S
-            </div>
-            <div>
-              <div className="text-sm font-bold text-white">Lecture by Stephen</div>
-              <div className="text-xs text-white/50">Instructional Designer & UX Specialist</div>
-            </div>
-          </div>
+        <div className="flex items-center justify-end pt-6 border-t border-white/10">
 
           <button
             onClick={onStart}

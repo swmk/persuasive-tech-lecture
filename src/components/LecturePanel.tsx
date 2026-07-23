@@ -23,6 +23,10 @@ export const LecturePanel: React.FC<LecturePanelProps> = ({
     ? featurePrinciple.subPrinciples.find(s => s.id === feature.subPrinciple)
     : null;
 
+  const supportingSubPrincipleObj = (feature?.supportingSubPrinciple && featurePrinciple)
+    ? featurePrinciple.subPrinciples.find(s => s.id === feature.supportingSubPrinciple)
+    : null;
+
   return (
     <aside className="w-full h-full bg-white text-slate-900 p-8 lg:p-10 flex flex-col overflow-y-auto border-l border-slate-200 select-text">
       {/* Principle Banner */}
@@ -61,14 +65,21 @@ export const LecturePanel: React.FC<LecturePanelProps> = ({
             <h3 className="text-2xl font-bold mt-1 text-slate-900">
               {feature.name}
             </h3>
-            <div
-              className="inline-block text-xs font-bold font-mono uppercase tracking-wider mt-1.5 px-2 py-0.5 rounded"
-              style={{
-                backgroundColor: featurePrinciple.theme.accentSoft,
-                color: featurePrinciple.theme.accent
-              }}
-            >
-              Sub-Principle: {subPrincipleObj?.label || feature.subPrinciple}
+            <div className="flex flex-wrap gap-2 mt-2">
+              <div
+                className="inline-block text-xs font-bold font-mono uppercase tracking-wider px-2 py-0.5 rounded"
+                style={{
+                  backgroundColor: featurePrinciple.theme.accentSoft,
+                  color: featurePrinciple.theme.accent
+                }}
+              >
+                Sub-Principle: {subPrincipleObj?.label || feature.subPrinciple}
+              </div>
+              {supportingSubPrincipleObj && (
+                <div className="inline-block text-xs font-medium font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                  Supporting: {supportingSubPrincipleObj.label}
+                </div>
+              )}
             </div>
           </div>
 
@@ -91,42 +102,6 @@ export const LecturePanel: React.FC<LecturePanelProps> = ({
               {feature.rationale}
             </p>
           </div>
-
-          {/* Business & Tech Grid */}
-          <div className="grid grid-cols-2 gap-4 pt-2">
-            <div className="bg-emerald-50 border border-emerald-100 p-3.5 rounded-lg">
-              <h4 className="text-[10px] uppercase font-mono tracking-widest font-black text-emerald-800 mb-1">
-                Business Impact
-              </h4>
-              <p className="text-xs font-bold text-emerald-900 leading-snug">
-                {feature.businessValue}
-              </p>
-            </div>
-
-            <div className="bg-slate-100 border border-slate-200 p-3.5 rounded-lg">
-              <h4 className="text-[10px] uppercase font-mono tracking-widest font-black text-slate-600 mb-1">
-                Engineering Notes
-              </h4>
-              <p className="text-xs text-slate-800 leading-snug">
-                {feature.implementationNotes}
-              </p>
-            </div>
-          </div>
-
-          {/* Ethical Guardrail Alert */}
-          {feature.ethicalGuardrail && (
-            <div className="mt-auto p-4 bg-amber-50 border border-amber-200 rounded-lg">
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="text-amber-600 font-bold">⚠️</span>
-                <h4 className="text-[10px] uppercase font-mono tracking-widest font-black text-amber-900">
-                  Ethical Guardrail
-                </h4>
-              </div>
-              <p className="text-xs italic text-amber-950 leading-relaxed">
-                {feature.ethicalGuardrail}
-              </p>
-            </div>
-          )}
         </div>
       ) : (
         <div className="flex-1 flex flex-col items-center justify-center text-center p-6 text-slate-400">

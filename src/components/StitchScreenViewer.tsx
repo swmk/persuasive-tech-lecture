@@ -24,18 +24,33 @@ export const StitchScreenViewer: React.FC<StitchScreenViewerProps> = ({
   const [resolutionResults, setResolutionResults] = useState<ResolutionResult[]>([]);
   const [, startTransition] = useTransition();
 
-  // Perform resolution after DOM render
+  // Perform resolution after DOM render & on resize
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const results: ResolutionResult[] = screenData.features.map(feature => {
-      return resolveFeatureTarget(feature, containerRef.current!);
+    const updatePositions = () => {
+      if (!containerRef.current) return;
+      const results: ResolutionResult[] = screenData.features.map(feature => {
+        return resolveFeatureTarget(feature, containerRef.current!);
+      });
+
+      startTransition(() => {
+        setResolutionResults(results);
+        onResolutionResults(results);
+      });
+    };
+
+    updatePositions();
+
+    const resizeObserver = new ResizeObserver(() => {
+      updatePositions();
     });
 
-    startTransition(() => {
-      setResolutionResults(results);
-      onResolutionResults(results);
-    });
+    resizeObserver.observe(containerRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, [screenData, onResolutionResults]);
 
   const activePrinciple = PRINCIPLES_DATA[principleId] || PRINCIPLES_DATA['convenience'];
@@ -78,7 +93,7 @@ export const StitchScreenViewer: React.FC<StitchScreenViewerProps> = ({
           dangerouslySetInnerHTML={{ __html: screenData.htmlCode }}
         />
 
-        {/* Overlayed Callout Badges & Highlights */}
+        {/* Overlayed Callout Badges */}
         {showCallouts &&
           resolutionResults.map(res => {
             const feature = screenData.features.find(f => f.id === res.featureId);
@@ -88,26 +103,12 @@ export const StitchScreenViewer: React.FC<StitchScreenViewerProps> = ({
             const isResolved = res.status === 'resolved';
             const featurePrinciple = PRINCIPLES_DATA[feature.principle] || activePrinciple;
 
-            // Position computation
-            const pos = res.computedPosition || { x: 30, y: 30 + feature.number * 40 };
+            // Position computation - always placed on right edge
+            const containerWidth = containerRef.current?.clientWidth || 600;
+            const pos = res.computedPosition || { x: containerWidth - 20, y: 30 + feature.number * 50 };
 
             return (
               <React.Fragment key={feature.id}>
-                {/* Target Highlight Box on Selected Element */}
-                {isSelected && res.boundingClientRect && (
-                  <div
-                    className="absolute pointer-events-none z-20 border-2 rounded transition-all duration-300 animate-pulse"
-                    style={{
-                      top: `${res.boundingClientRect.top}px`,
-                      left: `${res.boundingClientRect.left}px`,
-                      width: `${res.boundingClientRect.width}px`,
-                      height: `${res.boundingClientRect.height}px`,
-                      borderColor: featurePrinciple.theme.accent,
-                      boxShadow: `0 0 20px ${featurePrinciple.theme.accent}80`
-                    }}
-                  />
-                )}
-
                 {/* Callout Number Pin */}
                 <button
                   onClick={() => onSelectFeature(feature.id)}

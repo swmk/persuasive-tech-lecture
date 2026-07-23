@@ -1,0 +1,67 @@
+{
+  "id": "account",
+  "title": "Member Profile & Pass",
+  "subtitle": "Status Becomes Part of Identity",
+  "principle": "status",
+  "speakerNotes": "On Slide 8, we explore how Status becomes part of user identity. The Gold tier preview illustrates Inspiring Aspiration Through Status by presenting an attractive future vision. The VIP Concierge demonstrates Making Customers Feel Important through elevated recognition. Finally, the Double Tier Credits event shows Payment Versus Achievement by offering accelerated status progress during a transparent campaign window.",
+  "features": [
+    {
+      "id": "acc-s1",
+      "number": 1,
+      "name": "Aspirational Gold Tier Preview",
+      "principle": "status",
+      "subPrinciple": "inspiring-aspiration",
+      "supportingSubPrinciple": "aspirational-marketing",
+      "description": "Previews exclusive benefits (Personal Styling Assistant & Private Lounge Invites) unlocked upon reaching Elite Gold rank.",
+      "rationale": "The premium tier gives the user an aspirational future identity and shows what higher status could unlock, motivating progression while keeping the path visible and realistic.",
+      "businessValue": "+33% upsell engagement.",
+      "implementationNotes": "Interactive preview modal showing Gold-only benefits and perks.",
+      "ethicalGuardrail": "Ensure previewed higher-tier benefits are genuinely delivered and that the path to reach them remains transparent and fair.",
+      "target": {
+        "dataAttribute": "account-gold-preview",
+        "css": ".aspirational-tier-banner",
+        "text": { "value": "Preview Elite Gold Privileges", "tag": "div" },
+        "preferredSide": "right"
+      }
+    },
+    {
+      "id": "acc-s2",
+      "number": 2,
+      "name": "VIP Concierge Priority Channel",
+      "principle": "status",
+      "subPrinciple": "customer-importance",
+      "supportingSubPrinciple": "status-differences",
+      "description": "Direct 24/7 dedicated concierge button reserved for ranked members with personalized recognition.",
+      "rationale": "Recognises and elevates members through dedicated, priority service, proving that higher status brings genuine platform importance.",
+      "businessValue": "Boosts high-value client retention.",
+      "implementationNotes": "Direct integration with priority customer support chat queue.",
+      "ethicalGuardrail": "Service quality promises for ranked members must be consistently maintained.",
+      "target": {
+        "dataAttribute": "account-vip-concierge",
+        "css": ".concierge-access-button",
+        "text": { "value": "Connect to VIP Concierge (24/7)", "tag": "button" },
+        "preferredSide": "right"
+      }
+    },
+    {
+      "id": "acc-s3",
+      "number": 3,
+      "name": "Double Tier Points Event Banner",
+      "principle": "status",
+      "subPrinciple": "payment-vs-achievement",
+      "supportingPrinciple": "loss-avoidance",
+      "supportingSubPrinciple": "time-scarcity",
+      "description": "Limited-time 2X Tier Credits event allowing members to accelerate tier progression on qualifying purchases.",
+      "rationale": "Allows users to advance faster through qualifying spend during a limited period. The primary purpose is status acceleration; the timer is the Loss Avoidance mechanism.",
+      "businessValue": "Generates significant revenue spikes during campaign windows.",
+      "implementationNotes": "Server multiplier engine automatically doubles calculated tier points during campaign window.",
+      "ethicalGuardrail": "The qualifying spend, multiplier, time window and effect on tier progress must be transparent. The design should not encourage harmful overspending.",
+      "target": {
+        "dataAttribute": "account-double-points",
+        "css": ".double-tier-event-card",
+        "text": { "value": "⚡ 2X TIER CREDITS ACTIVE (Ends in 18h)", "tag": "div" },
+        "preferredSide": "right"
+      }
+    }
+  ]
+}

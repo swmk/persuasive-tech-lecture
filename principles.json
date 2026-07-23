@@ -1,0 +1,317 @@
+{
+  "convenience": {
+    "id": "convenience",
+    "label": "Convenience",
+    "shortLabel": "C",
+    "definition": "Minimise friction, cognitive load and physical effort across the user journey.",
+    "lectureSummary": "Design choices that make actions effortless and intuitive increase user speed and completion.",
+    "theme": {
+      "accent": "#0066CC",
+      "accentSoft": "#E5F1FF",
+      "textOnAccent": "#FFFFFF",
+      "icon": "zap"
+    },
+    "subPrinciples": [
+      {
+        "id": "shortest-path",
+        "label": "Shortest Path to Conversion",
+        "definition": "Eliminate steps between intent and order completion.",
+        "featureExamples": ["1-Click Checkout", "Express Payment Buttons"]
+      },
+      {
+        "id": "smart-defaults",
+        "label": "Smart Defaults & Pre-Fills",
+        "definition": "Anticipate user input using stored, context-aware or statistical defaults.",
+        "featureExamples": ["Default Shipping Address", "Auto-Selected Payment Method"]
+      },
+      {
+        "id": "resume-not-restart",
+        "label": "Resume, Don't Restart",
+        "definition": "Preserve session state so users never repeat work.",
+        "featureExamples": ["Saved Cart Across Devices", "Persistent Checkout Inputs"]
+      },
+      {
+        "id": "progressive-disclosure",
+        "label": "Progressive Disclosure",
+        "definition": "Show essential information first and reveal details on demand.",
+        "featureExamples": ["Expandable Order Summary", "Accordion Details"]
+      },
+      {
+        "id": "choice-reduction",
+        "label": "Choice Reduction",
+        "definition": "Limit options at decision points to reduce cognitive fatigue.",
+        "featureExamples": ["Curated Add-Ons", "Single Primary CTA"]
+      },
+      {
+        "id": "clear-action-hierarchy",
+        "label": "Clear Action Hierarchy",
+        "definition": "Direct visual focus toward the single most important action.",
+        "featureExamples": ["Dominant Buy Button", "Subdued Secondary Actions"]
+      }
+    ],
+    "ethicalGuardrails": [
+      "Convenience should simplify legitimate choices, not hide critical terms.",
+      "Never default to optional recurring charges or add-ons without clear consent.",
+      "Always allow users to easily review and edit auto-filled information."
+    ]
+  },
+  "loss-avoidance": {
+    "id": "loss-avoidance",
+    "label": "Loss Avoidance",
+    "shortLabel": "L",
+    "definition": "Frame decisions around protecting value, progress or exclusive privileges.",
+    "lectureSummary": "Users feel the pain of losing something more strongly than the pleasure of gaining an equal reward.",
+    "theme": {
+      "accent": "#D97706",
+      "accentSoft": "#FEF3C7",
+      "textOnAccent": "#FFFFFF",
+      "icon": "shield-alert"
+    },
+    "subPrinciples": [
+      {
+        "id": "time-scarcity",
+        "label": "Time Scarcity",
+        "definition": "Highlight time limits on availability or special conditions.",
+        "featureExamples": ["Cart Hold Countdown", "Flash Deal Timer"]
+      },
+      {
+        "id": "quantity-scarcity",
+        "label": "Quantity Scarcity",
+        "definition": "Show low stock levels to signal high demand and impending loss.",
+        "featureExamples": ["Low Stock Counter", "Remaining Items Warning"]
+      },
+      {
+        "id": "progress-preservation",
+        "label": "Progress Preservation",
+        "definition": "Protect effort, earned status or discounts already accumulated.",
+        "featureExamples": ["Free Shipping Threshold Bar", "Saved Discount Lock"]
+      },
+      {
+        "id": "privilege-preservation",
+        "label": "Privilege Preservation",
+        "definition": "Remind users of earned member rights that expire if unacted upon.",
+        "featureExamples": ["Expiring Reward Voucher", "VIP Benefit Guarantee"]
+      },
+      {
+        "id": "reference-dependence",
+        "label": "Reference Dependence",
+        "definition": "Anchor value against higher original prices or lost savings.",
+        "featureExamples": ["Crossed-Out Original Price", "Total Savings Callout"]
+      }
+    ],
+    "ethicalGuardrails": [
+      "Timers and inventory counters must reflect real backend conditions.",
+      "Do not generate artificial urgency or fake stock warnings.",
+      "Clearly distinguish between temporary holds and actual commitments."
+    ]
+  },
+  "status": {
+    "id": "status",
+    "label": "Status",
+    "shortLabel": "S",
+    "definition": "Make rank, progression, exclusivity and earned privileges visible and meaningful.",
+    "lectureSummary": "Users are motivated by recognised standing, advancement and access to differentiated benefits.",
+    "theme": {
+      "accent": "#2F9B68",
+      "accentSoft": "#E3F4EB",
+      "textOnAccent": "#FFFFFF",
+      "icon": "crown"
+    },
+    "subPrinciples": [
+      {
+        "id": "aspirational-marketing",
+        "label": "Creating Desire Through Aspirational Marketing",
+        "definition": "Make the product, membership or higher tier feel desirable before asking the user to pursue it.",
+        "patterns": [
+          "Secrecy and hype",
+          "Scarcity and exclusivity",
+          "Identity and association",
+          "Premium aesthetics and design",
+          "Functionality and uniqueness"
+        ],
+        "featureExamples": [
+          "Elite-only products",
+          "Premium visual design",
+          "Platinum lifestyle imagery",
+          "Exclusive member collections",
+          "Limited-edition products",
+          "Member-only launches"
+        ]
+      },
+      {
+        "id": "inspiring-aspiration",
+        "label": "Inspiring Aspiration Through Status",
+        "definition": "Show users what higher status looks like and how their future experience could improve.",
+        "patterns": [
+          "Aspirational imagery",
+          "Lifestyle branding",
+          "Realistic and attainable goals"
+        ],
+        "featureExamples": [
+          "Previewing Elite Platinum benefits",
+          "Showing the lifestyle or privileges associated with higher tiers",
+          "Presenting the next tier as achievable",
+          "Comparing current and future benefits positively"
+        ]
+      },
+      {
+        "id": "pre-ownership",
+        "label": "Pre-Ownership",
+        "definition": "Create emotional investment and insider identity before the user fully owns the product, service or status.",
+        "patterns": [
+          "Early access and betas",
+          "Pre-orders",
+          "Wishlists",
+          "Insider communication",
+          "Membership previews",
+          "Sneak peeks"
+        ],
+        "featureExamples": [
+          "Elite members receiving early access",
+          "Adding premium items to a wishlist",
+          "Joining a waitlist",
+          "Previewing upcoming Elite benefits",
+          "Member-exclusive product previews"
+        ]
+      },
+      {
+        "id": "status-differences",
+        "label": "Establishing Status Differences",
+        "definition": "Make the difference between membership levels, achievements or access rights visible and understandable.",
+        "patterns": [
+          "Tiered rewards and badges",
+          "Visible ranks",
+          "Member-only privileges",
+          "Social proof",
+          "Community recognition",
+          "Public celebrations"
+        ],
+        "featureExamples": [
+          "Elite Silver, Elite Gold and Elite Platinum badges",
+          "Tier badges",
+          "Exclusive deals",
+          "Different benefits by tier",
+          "Priority service",
+          "Premium shipping",
+          "VIP access"
+        ]
+      },
+      {
+        "id": "reward-achievement",
+        "label": "Reward and Achievement Structures",
+        "definition": "Connect continued behaviour to incremental progress, milestones and rewards.",
+        "patterns": [
+          "Points",
+          "Badges",
+          "Progress bars",
+          "Regular rewards",
+          "Initial head starts",
+          "Shared goals"
+        ],
+        "featureExamples": [
+          "Progress to Elite Gold",
+          "Membership points",
+          "Percentage completed",
+          "Remaining spend to the next tier",
+          "Unlocked benefits",
+          "Tier milestones",
+          "Bonus progress"
+        ]
+      },
+      {
+        "id": "payment-vs-achievement",
+        "label": "Payment Versus Achievement",
+        "definition": "Allow users to attain or accelerate status through spending, payment or achievement, while keeping the distinction transparent and fair.",
+        "patterns": [
+          "Paid upgrades",
+          "Buying points",
+          "Spending-based tier progress",
+          "Accelerated status",
+          "Membership fees",
+          "Bonus tier credits"
+        ],
+        "featureExamples": [
+          "Spend $200 to receive double Elite credits",
+          "Paid premium membership",
+          "Spending thresholds that contribute to tier status",
+          "Purchasing additional points",
+          "Tier accelerators"
+        ],
+        "ethicalConsiderations": [
+          "Explanations must acknowledge fairness.",
+          "Clearly explain what can be earned, what can be purchased, and what can be accelerated."
+        ]
+      },
+      {
+        "id": "public-status-display",
+        "label": "Encouraging Public Status Displays",
+        "definition": "Allow users to visibly display their rank, achievements or exclusive access.",
+        "patterns": [
+          "Profile badges",
+          "Member titles",
+          "Shareable achievements",
+          "Public recognition",
+          "Exclusive physical or digital symbols",
+          "User-generated content"
+        ],
+        "featureExamples": [
+          "Elite badge beside the user's name",
+          "Shareable Gold or Platinum achievement",
+          "Member profile insignia",
+          "Exclusive member card",
+          "VIP luggage tag or digital emblem"
+        ]
+      },
+      {
+        "id": "customer-importance",
+        "label": "Making Customers Feel Important",
+        definition: "Recognise and elevate customers so they feel valued by the platform.",
+        "patterns": [
+          "Personalised recognition",
+          "Milestone celebrations",
+          "Featured contributions",
+          "Surprise rewards",
+          "Advisory or insider roles",
+          "Platform influence"
+        ],
+        "featureExamples": [
+          "Congratulations on reaching Elite Gold",
+          "Thank-you for the tenth purchase",
+          "Surprise shipping upgrade",
+          "Personalised member recognition",
+          "Invitation to preview new products",
+          "VIP customer feedback group"
+        ]
+      },
+      {
+        "id": "ethical-status-design",
+        "label": "Ethical Status Design",
+        definition: "Keep status aspirational, attainable and constructive.",
+        "patterns": [
+          "Emphasise positive aspiration rather than humiliation",
+          "Provide realistic incremental goals",
+          "Give newcomers a visible path forward",
+          "Use exclusivity carefully",
+          "Avoid portraying non-members or lower tiers as inferior",
+          "Preserve fairness between users who earn status and users who pay for it",
+          "Explain tier requirements and benefits clearly",
+          "Avoid encouraging unaffordable or harmful spending",
+          "Encourage cooperation where appropriate"
+        ],
+        "featureExamples": [
+          "Transparent tier requirements",
+          "Realistic incremental goals",
+          "Clear spend multipliers",
+          "Fairness between earned and paid status"
+        ]
+      }
+    ],
+    "ethicalGuardrails": [
+      "Emphasise positive aspiration rather than humiliation or devaluation.",
+      "Provide realistic incremental goals and give newcomers a visible path forward.",
+      "Avoid portraying non-members or lower tiers as inferior.",
+      "Preserve fairness between users who earn status and users who pay for or accelerate it.",
+      "Explain tier requirements, multipliers and benefits clearly, avoiding encouraging unaffordable or harmful spending."
+    ]
+  }
+}

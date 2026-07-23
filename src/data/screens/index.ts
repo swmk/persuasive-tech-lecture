@@ -41,7 +41,7 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'home-smart-default-address',
           css: '.default-address-chip',
           text: { value: 'Deliver to: 742 Evergreen Terr (Primary)', tag: 'div' },
-          preferredSide: 'bottom'
+          preferredSide: 'right'
         }
       },
       {
@@ -58,7 +58,7 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'home-resume-banner',
           css: '.resume-session-bar',
           text: { value: 'Welcome back, Stephen! You have 2 items in your cart', tag: 'div' },
-          preferredSide: 'top'
+          preferredSide: 'right'
         }
       }
     ],
@@ -292,7 +292,7 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'plp-stock-alert',
           css: '.low-stock-pill',
           text: { value: 'Only 3 left in stock', tag: 'span' },
-          preferredSide: 'top'
+          preferredSide: 'right'
         }
       },
       {
@@ -309,7 +309,7 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'plp-price-strike',
           css: '.reference-price-tag',
           text: { value: '$499.00', tag: 'span' },
-          preferredSide: 'bottom'
+          preferredSide: 'right'
         }
       }
     ],
@@ -473,7 +473,7 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'pdp-buy-cta',
           css: '.primary-buy-now',
           text: { value: 'Buy Now - Express Checkout', tag: 'button' },
-          preferredSide: 'left'
+          preferredSide: 'right'
         }
       },
       {
@@ -490,7 +490,7 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'pdp-specs-drawer',
           css: '.specifications-accordion',
           text: { value: 'Technical Specifications & Materials', tag: 'div' },
-          preferredSide: 'top'
+          preferredSide: 'right'
         }
       },
       {
@@ -507,7 +507,7 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'pdp-curated-sets',
           css: '.curated-pairings-grid',
           text: { value: 'Complete the Set (Save 15%)', tag: 'div' },
-          preferredSide: 'bottom'
+          preferredSide: 'right'
         }
       }
     ],
@@ -645,7 +645,7 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'cart-shipping-progress',
           css: '.shipping-progress-card',
           text: { value: 'Add $21.00 more to unlock FREE Express Delivery', tag: 'div' },
-          preferredSide: 'top'
+          preferredSide: 'right'
         }
       },
       {
@@ -680,7 +680,7 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'cart-savings-lock',
           css: '.member-discount-lock',
           text: { value: 'VIP Status Savings Locked: -$48.00', tag: 'div' },
-          preferredSide: 'bottom'
+          preferredSide: 'right'
         }
       }
     ],
@@ -835,7 +835,7 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'checkout-billing-sync',
           css: '.sync-address-checkbox',
           text: { value: 'Billing address matches shipping destination', tag: 'div' },
-          preferredSide: 'bottom'
+          preferredSide: 'right'
         }
       },
       {
@@ -852,7 +852,7 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
           dataAttribute: 'checkout-summary-drawer',
           css: '.summary-disclosure-toggle',
           text: { value: 'Order Total: $1,299.00 (Show Details)', tag: 'div' },
-          preferredSide: 'top'
+          preferredSide: 'right'
         }
       }
     ],
@@ -935,20 +935,21 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
   membership: {
     id: 'membership',
     title: 'VIP Membership Lounge',
-    subtitle: 'Status Patterns: Visible Rank & Tier Progress Ladder',
+    subtitle: 'A Visible Status Ladder',
     principle: 'status',
-    speakerNotes: `Slide 7 introduces Status persuasive mechanics. Social standing and earned rank drive deep customer retention. Here, the Elite Silver tier badge provides visible standing, while a spend progress bar shows exact distance to Elite Gold status.`,
+    speakerNotes: `On Slide 7, we examine the Status principle. The current Silver tier establishes a visible status difference through a named rank and badge. The progress bar demonstrates Reward and Achievement Structures by showing accumulated progress and the exact remaining distance to Gold. This turns aspiration into a realistic, actionable goal while preserving a constructive, transparent path forward.`,
     features: [
       {
         id: 'vip-s1',
         number: 1,
         name: 'Elite Silver Tier Badge Identity',
         principle: 'status',
-        subPrinciple: 'visible-rank',
-        description: 'Displays active VIP tier status with metallic badge styling and member serial ID.',
-        rationale: 'Establishes clear recognized rank, invoking pride of belonging and status identity.',
-        businessValue: 'Drives 2.4x higher repeat brand engagement.',
-        implementationNotes: 'Includes metallic badge background effect and custom member tier level.',
+        subPrinciple: 'status-differences',
+        description: 'Displays active VIP tier status with metallic badge styling and member serial ID, making position in the hierarchy visible.',
+        rationale: 'The named Silver tier and badge establish a visible status difference, making the member\'s position in the hierarchy clear, transparent, and recognizable.',
+        businessValue: 'Drives 2.4x higher repeat brand engagement through recognized rank.',
+        implementationNotes: 'Includes metallic badge styling and member tier level.',
+        ethicalGuardrail: 'Make tier requirements and benefit differences transparent without portraying lower tiers as inferior.',
         target: {
           dataAttribute: 'vip-tier-badge',
           css: '.current-tier-card',
@@ -961,16 +962,18 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
         number: 2,
         name: 'Ladder Spend Progress to Elite Gold',
         principle: 'status',
-        subPrinciple: 'climbing-the-ladder',
-        description: 'Visual progress bar displaying current annual spend toward unlocking Elite Gold status.',
-        rationale: 'Leverages the goal-gradient effect; users spend more as they get closer to reaching higher rank.',
+        subPrinciple: 'reward-achievement',
+        supportingSubPrinciple: 'inspiring-aspiration',
+        description: 'Visual progress bar displaying current spend ($650 / $1,000) and remaining distance ($350) toward unlocking Elite Gold status.',
+        rationale: 'Connects continued spending to incremental progress. Showing progress already achieved and a realistic remaining distance to Gold turns a vague aspiration into an actionable goal.',
         businessValue: 'Increases customer spend trajectory toward tier unlocks by 29%.',
-        implementationNotes: 'Shows exact remaining spend amount ($350) required to reach Gold.',
+        implementationNotes: 'Shows exact remaining spend amount required to reach Gold.',
+        ethicalGuardrail: 'Tier requirements and qualifying thresholds must be transparent, attainable, and designed not to encourage harmful or unaffordable overspending.',
         target: {
           dataAttribute: 'vip-tier-ladder',
           css: '.tier-progress-track',
           text: { value: '$350.00 spend remaining to reach Elite Gold', tag: 'div' },
-          preferredSide: 'top'
+          preferredSide: 'right'
         }
       },
       {
@@ -978,16 +981,18 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
         number: 3,
         name: 'Unlocked Member Privilege Checklist',
         principle: 'status',
-        subPrinciple: 'benefit-validation',
-        description: 'Displays unlocked perks (Free Express Shipping, Priority VIP Support).',
-        rationale: 'Reaffirms tangible value of holding active rank to prevent status churn.',
+        subPrinciple: 'status-differences',
+        supportingSubPrinciple: 'customer-importance',
+        description: 'Displays unlocked perks (Free Express Shipping, Early Flash Drop Access, 1.5x Points Multiplier, 24/7 VIP Chat Queue).',
+        rationale: 'The benefits demonstrate that the member\'s tier provides tangible privileges rather than only a decorative label, validating current rank.',
         businessValue: '+40% loyalty program satisfaction score.',
         implementationNotes: 'Checklist renders active unlocked badges dynamically per member level.',
+        ethicalGuardrail: 'Ensure status benefits are real, accurately described, and consistently delivered.',
         target: {
           dataAttribute: 'vip-benefits-grid',
           css: '.unlocked-perks-list',
           text: { value: 'Active Silver Tier Privileges', tag: 'div' },
-          preferredSide: 'bottom'
+          preferredSide: 'right'
         }
       }
     ],
@@ -1040,25 +1045,27 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
   account: {
     id: 'account',
     title: 'Member Profile & Pass',
-    subtitle: 'Status Patterns: Aspirational Identity & Acceleration Events',
+    subtitle: 'Status Becomes Part of Identity',
     principle: 'status',
-    speakerNotes: `Our final screen slide showcases Aspirational Identity and Status Acceleration. Teasing the benefits of the Elite Gold level motivates users to upgrade, while a 2x Bonus Tier Points event combines status escalation with temporary loss avoidance.`,
+    speakerNotes: `On Slide 8, we explore how Status becomes part of user identity. The Gold tier preview illustrates Inspiring Aspiration Through Status by presenting an attractive future vision. The VIP Concierge demonstrates Making Customers Feel Important through elevated recognition. Finally, the Double Tier Credits event shows Payment Versus Achievement by offering accelerated status progress during a transparent campaign window.`,
     features: [
       {
         id: 'acc-s1',
         number: 1,
         name: 'Aspirational Gold Tier Preview',
         principle: 'status',
-        subPrinciple: 'aspirational-identity',
-        description: 'Previews exclusive benefits unlocked upon reaching Elite Gold rank.',
-        rationale: 'Creates an attractive future identity vision, prompting incremental purchases to bridge the gap.',
+        subPrinciple: 'inspiring-aspiration',
+        supportingSubPrinciple: 'aspirational-marketing',
+        description: 'Previews exclusive benefits (Personal Styling Assistant & Private Lounge Invites) unlocked upon reaching Elite Gold rank.',
+        rationale: 'The premium tier gives the user an aspirational future identity and shows what higher status could unlock, motivating progression while keeping the path visible and realistic.',
         businessValue: '+33% upsell engagement.',
         implementationNotes: 'Interactive preview modal showing Gold-only benefits and perks.',
+        ethicalGuardrail: 'Ensure previewed higher-tier benefits are genuinely delivered and that the path to reach them remains transparent and fair.',
         target: {
           dataAttribute: 'account-gold-preview',
           css: '.aspirational-tier-banner',
           text: { value: 'Preview Elite Gold Privileges', tag: 'div' },
-          preferredSide: 'top'
+          preferredSide: 'right'
         }
       },
       {
@@ -1066,11 +1073,13 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
         number: 2,
         name: 'VIP Concierge Priority Channel',
         principle: 'status',
-        subPrinciple: 'exclusive-access',
-        description: 'Direct 24/7 dedicated concierge button reserved for ranked members.',
-        rationale: 'Offers tangible privilege differentiation, proving that higher status brings real service superiority.',
+        subPrinciple: 'customer-importance',
+        supportingSubPrinciple: 'status-differences',
+        description: 'Direct 24/7 dedicated concierge button reserved for ranked members with personalized recognition.',
+        rationale: 'Recognises and elevates members through dedicated, priority service, proving that higher status brings genuine platform importance.',
         businessValue: 'Boosts high-value client retention.',
         implementationNotes: 'Direct integration with priority customer support chat queue.',
+        ethicalGuardrail: 'Service quality promises for ranked members must be consistently maintained.',
         target: {
           dataAttribute: 'account-vip-concierge',
           css: '.concierge-access-button',
@@ -1083,16 +1092,19 @@ export const SCREENS_DATA: Record<string, ScreenData> = {
         number: 3,
         name: 'Double Tier Points Event Banner',
         principle: 'status',
-        subPrinciple: 'temporary-acceleration',
-        description: '48-hour event doubling earned tier progress points on all purchases.',
-        rationale: 'Combines Status ladder advancement with Loss Avoidance time boundaries to trigger immediate purchase action.',
+        subPrinciple: 'payment-vs-achievement',
+        supportingPrinciple: 'loss-avoidance',
+        supportingSubPrinciple: 'time-scarcity',
+        description: 'Limited-time 2X Tier Credits event allowing members to accelerate tier progression on qualifying purchases.',
+        rationale: 'Allows users to advance faster through qualifying spend during a limited period. The primary purpose is status acceleration; the timer is the Loss Avoidance mechanism.',
         businessValue: 'Generates significant revenue spikes during campaign windows.',
         implementationNotes: 'Server multiplier engine automatically doubles calculated tier points during campaign window.',
+        ethicalGuardrail: 'The qualifying spend, multiplier, time window and effect on tier progress must be transparent. The design should not encourage harmful overspending.',
         target: {
           dataAttribute: 'account-double-points',
           css: '.double-tier-event-card',
           text: { value: '⚡ 2X TIER CREDITS ACTIVE (Ends in 18h)', tag: 'div' },
-          preferredSide: 'bottom'
+          preferredSide: 'right'
         }
       }
     ],

@@ -6,7 +6,7 @@ export const DECK_CONFIG: DeckConfig = {
     id: 'luxe-platform-persuasive-technology',
     title: 'Persuasive Technology in E-Commerce',
     subtitle: 'An Interactive UX Lecture',
-    author: 'Stephen',
+    author: 'UX Masterclass',
     aspectRatio: '16:9',
     defaultTheme: 'light',
     openingSlide: {
@@ -133,12 +133,6 @@ export const DECK_CONFIG: DeckConfig = {
       annotationFile: 'screens/account.json',
       sectionTitle: 'Status',
       principle: 'status'
-    },
-    {
-      id: 'closing',
-      type: 'closing',
-      title: 'Design for Influence, Not Manipulation',
-      principle: null
     }
   ]
 };
