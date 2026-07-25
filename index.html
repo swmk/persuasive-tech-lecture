@@ -1,16 +1,1701 @@
-<!doctype html>
-<html lang="en" class="h-full bg-[#0F0F0F]">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Persuasive Technology in E-Commerce — Interactive Lecture Deck</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body class="h-full m-0 p-0 bg-[#0F0F0F] text-[#E0E0E0] overflow-hidden">
-    <div id="root" class="h-full"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrabFood – Affordance & CLOSERS Analysis</title>
+  <style>
+    /* CSS RESETS & VARIABLES */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    :root {
+      --bg-dark: #0f172a;
+      --panel-bg: #ffffff;
+      --panel-subtle: #f8fafc;
+      --panel-border: #e2e8f0;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --grab-green: #00b14f;
+      --accent-amber: #f59e0b;
+      --accent-amber-light: #fef3c7;
+      --works-green: #10b981;
+      --works-green-bg: #ecfdf5;
+      --works-green-border: #a7f3d0;
+      --fails-red: #ef4444;
+      --fails-red-bg: #fef2f2;
+      --fails-red-border: #fecaca;
+      --improve-blue: #3b82f6;
+      --improve-blue-bg: #eff6ff;
+      --improve-blue-border: #bfdbfe;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-color: #0f172a;
+      font-family: var(--font-family);
+      color: var(--text-main);
+      overflow: hidden;
+    }
+
+    /* FULL SCREEN PRESENTATION STAGE */
+    #slide-stage {
+      width: 100vw;
+      height: 100vh;
+      background-color: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* HEADER BAR */
+    header.slide-header {
+      height: 64px;
+      background-color: var(--bg-dark);
+      color: #ffffff;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--grab-green);
+      flex-shrink: 0;
+      z-index: 30;
+    }
+
+    .header-title-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .grab-badge {
+      background-color: var(--grab-green);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 15px;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      letter-spacing: 0.5px;
+    }
+
+    .main-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #f8fafc;
+      letter-spacing: -0.3px;
+    }
+
+    .header-instruction {
+      font-size: 14px;
+      color: #94a3b8;
+      font-weight: 400;
+      margin-left: 8px;
+    }
+
+    .header-legend {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #e2e8f0;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .dot.green { background-color: var(--works-green); box-shadow: 0 0 8px rgba(16, 185, 129, 0.5); }
+    .dot.red { background-color: var(--fails-red); box-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
+    .dot.blue { background-color: var(--improve-blue); box-shadow: 0 0 8px rgba(59, 130, 246, 0.5); }
+
+    /* MAIN CONTENT AREA - FLUID FULLSCREEN */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      padding: 16px 28px;
+      gap: 28px;
+      overflow: hidden;
+      position: relative;
+      min-height: 0;
+    }
+
+    /* LEFT COLUMN: PHONE MOCKUP AREA (FULL HEIGHT FLEX) */
+    .left-section {
+      width: 380px;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid #cbd5e1;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+      padding: 16px;
+      height: 100%;
+    }
+
+    .phone-container {
+      position: relative;
+      width: 330px;
+      height: 100%;
+      max-height: 780px;
+      background-color: #0f172a;
+      border-radius: 44px;
+      padding: 10px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35), 0 0 0 4px #334155;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      border-radius: 34px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      font-size: 13px;
+      color: #1e293b;
+    }
+
+    /* PHONE STATUS BAR */
+    .phone-status-bar {
+      height: 36px;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 18px 4px 18px;
+      font-weight: 700;
+      font-size: 12px;
+      z-index: 10;
+      flex-shrink: 0;
+    }
+
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    /* PHONE TOP NAV BAR */
+    .phone-nav-bar {
+      height: 44px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #ffffff;
+      border-bottom: 1px solid #f1f5f9;
+      z-index: 10;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .nav-arrow {
+      font-size: 16px;
+      color: #334155;
+      cursor: pointer;
+    }
+
+    .address-pill {
+      background-color: #f1f5f9;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      cursor: pointer;
+      width: 190px;
+      transition: all 0.2s ease;
+    }
+
+    .address-label {
+      font-size: 8px;
+      color: #64748b;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .address-text-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .address-text {
+      font-size: 12px;
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      color: #334155;
+      font-size: 15px;
+    }
+
+    /* PROMOTIONAL BANNER */
+    .flash-deals-banner {
+      background: linear-gradient(135deg, #ff6b00 0%, #ff8800 100%);
+      color: #ffffff;
+      padding: 14px 16px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(255, 107, 0, 0.25);
+      flex-shrink: 0;
+    }
+
+    .banner-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .timer-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background-color: #1e293b;
+      color: #ffffff;
+      padding: 4px 14px;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: 2px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .timer-colon {
+      color: #ff6b00;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0.3; }
+    }
+
+    /* MIN SPEND BAR */
+    .min-spend-bar {
+      background-color: #fff7ed;
+      color: #9a3412;
+      border-bottom: 1px solid #ffedd5;
+      padding: 7px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    /* RESTAURANT LIST */
+    .restaurant-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #f8fafc;
+      position: relative;
+    }
+
+    .restaurant-card {
+      background-color: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      border: 1px solid #f1f5f9;
+      position: relative;
+    }
+
+    .rest-img {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      flex-shrink: 0;
+      background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .rest-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .rest-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 2px;
+      line-height: 1.2;
+    }
+
+    .rest-meta {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      color: #64748b;
+      margin-bottom: 3px;
+    }
+
+    .star {
+      color: #eab308;
+      font-weight: 700;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .disc-price {
+      color: #dc2626;
+      font-weight: 800;
+    }
+
+    .orig-price {
+      color: #94a3b8;
+      text-decoration: line-through;
+      font-size: 10px;
+    }
+
+    .del-time {
+      color: #64748b;
+      font-size: 10px;
+      margin-left: auto;
+    }
+
+    .busy-badge {
+      margin-top: 3px;
+      font-size: 9px;
+      color: #b45309;
+      background-color: #fef3c7;
+      padding: 2px 5px;
+      border-radius: 4px;
+      display: inline-block;
+      width: fit-content;
+      font-weight: 600;
+    }
+
+    /* HOTSPOT OVERLAY TARGETS ON PHONE - EDGE TO EDGE WITHOUT BORDER */
+    .target-overlay {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      transition: all 0.25s ease;
+      z-index: 20;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .target-overlay.active {
+      background-color: rgba(245, 158, 11, 0.28);
+    }
+
+    /* HOTSPOT BUTTONS ON RIGHT MARGIN OF MOCKUP */
+    .hotspot-button-list {
+      position: absolute;
+      right: -24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      z-index: 30;
+    }
+
+    .hotspot-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      color: var(--text-main);
+      border: 3px solid #cbd5e1;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      outline: none;
+      position: relative;
+    }
+
+    .hotspot-btn:hover {
+      transform: scale(1.1);
+      border-color: var(--accent-amber);
+      color: var(--accent-amber);
+    }
+
+    .hotspot-btn:focus-visible {
+      outline: 2px solid var(--accent-amber);
+    }
+
+    .hotspot-btn.active {
+      background-color: var(--accent-amber);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.35), 0 8px 20px rgba(245, 158, 11, 0.5);
+      transform: scale(1.15);
+    }
+
+    /* SVG CONNECTOR LINES OVERLAY */
+    .connector-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 15;
+    }
+
+    .connector-line {
+      stroke: #94a3b8;
+      stroke-width: 2.5;
+      stroke-dasharray: 6, 6;
+      fill: none;
+      transition: all 0.25s ease;
+    }
+
+    .connector-line.active {
+      stroke: var(--accent-amber);
+      stroke-width: 3.5;
+      stroke-dasharray: none;
+      filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.5));
+    }
+
+    /* RIGHT COLUMN: INTERACTIVE ANALYSIS PANEL (FULL FLEX) */
+    .right-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    /* TOP PANEL: HEADER & BADGE */
+    .panel-header-card {
+      background-color: var(--panel-bg);
+      border-radius: var(--radius-lg);
+      padding: 12px 20px;
+      border: 1px solid var(--panel-border);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .header-title-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .content-hotspots-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--panel-subtle);
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--panel-border);
+      flex-shrink: 0;
+    }
+
+    .content-hotspots-nav .nav-label {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-right: 2px;
+    }
+
+    .content-hotspots-nav .nav-num-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      color: #334155;
+      border: 2px solid #cbd5e1;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .content-hotspots-nav .nav-num-btn:hover {
+      border-color: var(--accent-amber);
+      color: var(--accent-amber);
+      background-color: #fef3c7;
+    }
+
+    .content-hotspots-nav .nav-num-btn:focus-visible {
+      outline: 2px solid var(--accent-amber);
+    }
+
+    .content-hotspots-nav .nav-num-btn.active {
+      background-color: var(--accent-amber);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+    }
+
+    .content-hotspots-nav .reset-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background-color: #ffffff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-left: 4px;
+    }
+
+    .content-hotspots-nav .reset-btn:hover {
+      background-color: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .footer-brand {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .active-badge-num {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background-color: var(--accent-amber);
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+      flex-shrink: 0;
+    }
+
+    .active-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .active-feature-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.3px;
+    }
+
+    .active-principle-stmt {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--grab-green);
+    }
+
+    /* TWO COLUMN MIDDLE SECTION: AFFORDANCE & CLOSERS */
+    .analysis-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 14px;
+      flex: 1.1;
+      min-height: 0;
+    }
+
+    .analysis-box {
+      background-color: var(--panel-bg);
+      border-radius: var(--radius-lg);
+      padding: 14px 18px;
+      border: 1px solid var(--panel-border);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+    }
+
+    .box-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 15px;
+      font-weight: 800;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--panel-subtle);
+    }
+
+    .box-header-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .box-header.affordance { color: var(--improve-blue); }
+    .box-header.closers { color: #7c3aed; }
+
+    /* CLOSERS RAINBOW BADGE STRIP */
+    .closers-spectrum-bar {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .c-chip {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* AFFORDANCE FIELD LIST */
+    .affordance-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .aff-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .aff-label {
+      font-weight: 800;
+      color: #334155;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .aff-value {
+      color: #475569;
+    }
+
+    /* CLOSERS PRINCIPLES LIST */
+    .closers-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .closer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      background-color: var(--panel-subtle);
+      border: 1px solid var(--panel-border);
+      font-size: 13px;
+      gap: 12px;
+    }
+
+    .closer-name-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .closer-code {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      font-weight: 900;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+
+    .closer-text-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .closer-title {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .closer-tagline {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    /* CLOSERS STATUS BADGES */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .badge-green { background-color: #d1fae5; color: #065f46; }
+    .badge-red { background-color: #fee2e2; color: #991b1b; }
+    .badge-blue { background-color: #dbeafe; color: #1e40af; }
+    .badge-amber { background-color: #fef3c7; color: #92400e; }
+
+    /* BOTTOM THREE ANALYSIS CARDS */
+    .cards-three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .eval-card {
+      background-color: var(--panel-bg);
+      border-radius: var(--radius-lg);
+      padding: 12px 16px;
+      border: 1px solid var(--panel-border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+    }
+
+    .eval-card.works {
+      background-color: var(--works-green-bg);
+      border-color: var(--works-green-border);
+    }
+
+    .eval-card.problems {
+      background-color: var(--fails-red-bg);
+      border-color: var(--fails-red-border);
+    }
+
+    .eval-card.improvement {
+      background-color: var(--improve-blue-bg);
+      border-color: var(--improve-blue-border);
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-title.works { color: #047857; }
+    .card-title.problems { color: #b91c1c; }
+    .card-title.improvement { color: #1d4ed8; }
+
+    .eval-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 12px;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    .eval-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .eval-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      font-weight: 800;
+    }
+
+    .works .eval-list li::before { color: var(--works-green); }
+    .problems .eval-list li::before { color: var(--fails-red); }
+    .improvement .eval-list li::before { color: var(--improve-blue); }
+
+    /* FLOW DIAGRAM BOX */
+    .flow-box {
+      margin-top: 4px;
+      padding: 6px 8px;
+      background-color: #ffffff;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--improve-blue-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .flow-label {
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--improve-blue);
+      text-transform: uppercase;
+    }
+
+    .flow-steps {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .flow-step-pill {
+      background-color: #dbeafe;
+      color: #1e40af;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 6px;
+      border-radius: 4px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .flow-arrow {
+      color: #3b82f6;
+      font-weight: 800;
+      font-size: 11px;
+    }
+
+    /* BOTTOM WHY IT MATTERS CALLOUT */
+    .why-matters-card {
+      background-color: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #0369a1;
+      flex-shrink: 0;
+    }
+
+    .why-matters-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .why-matters-text {
+      line-height: 1.4;
+    }
+
+    .why-matters-text strong {
+      font-weight: 800;
+      color: #0284c7;
+    }
+
+    /* FOOTER / NAVIGATION BAR */
+    footer.slide-footer {
+      height: 52px;
+      background-color: var(--bg-dark);
+      border-top: 1px solid #1e293b;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      z-index: 30;
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-label {
+      color: #94a3b8;
+      font-size: 13px;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .nav-num-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background-color: #1e293b;
+      color: #cbd5e1;
+      border: 2px solid #334155;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .nav-num-btn:hover {
+      background-color: #334155;
+      color: #ffffff;
+      border-color: var(--accent-amber);
+    }
+
+    .nav-num-btn:focus-visible {
+      outline: 2px solid var(--accent-amber);
+    }
+
+    .nav-num-btn.active {
+      background-color: var(--accent-amber);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+    }
+
+    .reset-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #1e293b;
+      color: #f1f5f9;
+      border: 1px solid #475569;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-left: 10px;
+    }
+
+    .reset-btn:hover {
+      background-color: #334155;
+      border-color: #94a3b8;
+    }
+
+    .footer-shortcuts {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STAGE CONTAINER (FULLSCREEN) -->
+  <div id="slide-stage" role="region" aria-label="GrabFood Affordance and CLOSERS Analysis Slide">
+    
+    <!-- TOP HEADER BAR -->
+    <header class="slide-header">
+      <div class="header-title-group">
+        <span class="grab-badge">GrabFood</span>
+        <h1 class="main-title">Affordance & CLOSERS Analysis</h1>
+        <span class="header-instruction">— Click any numbered point on the screen to analyze</span>
+      </div>
+      <div class="header-legend">
+        <div class="legend-item"><span class="dot green"></span> What works</div>
+        <div class="legend-item"><span class="dot red"></span> What doesn't</div>
+        <div class="legend-item"><span class="dot blue"></span> Improvement</div>
+      </div>
+    </header>
+
+    <!-- MAIN SLIDE CONTENT -->
+    <main class="slide-body">
+      
+      <!-- LEFT COLUMN: PHONE MOCKUP AREA -->
+      <section class="left-section" aria-label="GrabFood Screen Mockup with Hotspots">
+        
+        <!-- HOTSPOT BUTTONS ON LEFT -->
+        <div class="hotspot-button-list" role="tablist" aria-label="Analysis Hotspots">
+          <button class="hotspot-btn active" data-id="1" role="tab" aria-selected="true" aria-label="Hotspot 1: Delivery Address">1</button>
+          <button class="hotspot-btn" data-id="2" role="tab" aria-selected="false" aria-label="Hotspot 2: Flash Deals Banner">2</button>
+          <button class="hotspot-btn" data-id="3" role="tab" aria-selected="false" aria-label="Hotspot 3: Countdown Timer">3</button>
+          <button class="hotspot-btn" data-id="4" role="tab" aria-selected="false" aria-label="Hotspot 4: Minimum Spend">4</button>
+          <button class="hotspot-btn" data-id="5" role="tab" aria-selected="false" aria-label="Hotspot 5: Restaurant Row">5</button>
+        </div>
+
+        <!-- CONNECTOR OVERLAY SVG -->
+        <svg class="connector-svg" id="connector-svg">
+          <line id="connector-line" class="connector-line active" x1="0" y1="0" x2="0" y2="0" />
+        </svg>
+
+        <!-- PHONE CONTAINER -->
+        <div class="phone-container">
+          <div class="phone-screen" id="phone-screen">
+            
+            <!-- STATUS BAR -->
+            <div class="phone-status-bar">
+              <span>12:36 🏹</span>
+              <div class="status-icons">
+                <span>📶 5G</span>
+                <span>🔋 52%</span>
+              </div>
+            </div>
+
+            <!-- TOP NAV BAR & ADDRESS SELECTOR -->
+            <div class="phone-nav-bar" id="target-address">
+              <span class="nav-arrow">←</span>
+              <div class="address-pill">
+                <span class="address-label">Deliver now</span>
+                <div class="address-text-row">
+                  <span class="address-text">School of Accountancy...</span>
+                  <span>∨</span>
+                </div>
+              </div>
+              <div class="nav-actions">
+                <span>♡</span>
+                <span>📄</span>
+              </div>
+            </div>
+
+            <!-- FLASH DEALS BANNER -->
+            <div class="flash-deals-banner" id="target-banner">
+              <div class="banner-title">25% off flash deals</div>
+              <div class="timer-box" id="target-timer">
+                <span>14</span>
+                <span class="timer-colon">:</span>
+                <span>36</span>
+              </div>
+            </div>
+
+            <!-- MIN SPEND SUB-BAR -->
+            <div class="min-spend-bar" id="target-minspend">
+              Order now with min. spend S$12.00
+            </div>
+
+            <!-- RESTAURANT LIST -->
+            <div class="restaurant-list" id="target-restaurant">
+              
+              <!-- CARD 1 -->
+              <div class="restaurant-card">
+                <div class="rest-img">🥗</div>
+                <div class="rest-info">
+                  <div class="rest-name">Oh Wunder - Bras Basah Complex</div>
+                  <div class="rest-meta">
+                    <span class="star">★ 4.7</span>
+                    <span>(122) • $$$$ • Western</span>
+                  </div>
+                  <div class="price-row">
+                    <span class="disc-price">S$3.40</span>
+                    <span class="orig-price">S$6.40</span>
+                    <span class="del-time">39 mins</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 2 -->
+              <div class="restaurant-card">
+                <div class="rest-img">🍲</div>
+                <div class="rest-info">
+                  <div class="rest-name">87 Just Thai - Killiney Road</div>
+                  <div class="rest-meta">
+                    <span class="star">★ 4.6</span>
+                    <span>(513) • $$$$ • Thai</span>
+                  </div>
+                  <div class="price-row">
+                    <span class="disc-price">S$0.70</span>
+                    <span class="orig-price">S$3.70</span>
+                    <span class="del-time">44 mins</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 3 -->
+              <div class="restaurant-card">
+                <div class="rest-img">🥪</div>
+                <div class="rest-info">
+                  <div class="rest-name">Hello Arigato - Cross Street</div>
+                  <div class="rest-meta">
+                    <span class="star">★ 4.5</span>
+                    <span>(65) • $$$$ • Japanese</span>
+                  </div>
+                  <div class="price-row">
+                    <span class="disc-price">S$1.20</span>
+                    <span class="orig-price">S$4.20</span>
+                    <span class="del-time">39 mins</span>
+                  </div>
+                  <div class="busy-badge">⚠️ Longer wait, as restaurant is busy</div>
+                </div>
+              </div>
+
+              <!-- CARD 4 -->
+              <div class="restaurant-card">
+                <div class="rest-img">🍛</div>
+                <div class="rest-info">
+                  <div class="rest-name">Singapore Banana Leaf Restaurant</div>
+                  <div class="rest-meta">
+                    <span class="star">★ 3.8</span>
+                    <span>(469) • $$$$ • Indian</span>
+                  </div>
+                  <div class="price-row">
+                    <span class="disc-price">S$0.90</span>
+                    <span class="orig-price">S$3.90</span>
+                    <span class="del-time">39 mins</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- HIGHLIGHT OVERLAY ELEMENT (EDGE-TO-EDGE WITHOUT BORDER) -->
+            <div class="target-overlay" id="target-overlay"></div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: ANALYSIS PANEL -->
+      <section class="right-section" id="analysis-panel" aria-live="polite">
+        
+        <!-- TOP FEATURE HEADER -->
+        <div class="panel-header-card">
+          <div class="header-title-container">
+            <div class="active-badge-num" id="panel-badge">1</div>
+            <div class="active-title-group">
+              <h2 class="active-feature-title" id="panel-title">Delivery Address (Location Selector)</h2>
+              <span class="active-principle-stmt" id="panel-subtitle">Context before content</span>
+            </div>
+          </div>
+          <div class="content-hotspots-nav" aria-label="Content Hotspot Links">
+            <span class="nav-label">Hotspots:</span>
+            <button class="nav-num-btn active" data-id="1">1</button>
+            <button class="nav-num-btn" data-id="2">2</button>
+            <button class="nav-num-btn" data-id="3">3</button>
+            <button class="nav-num-btn" data-id="4">4</button>
+            <button class="nav-num-btn" data-id="5">5</button>
+            <button class="reset-btn" id="reset-btn">
+              <span>↺</span>
+              <span>Reset</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- TWO COLUMN: AFFORDANCE & CLOSERS -->
+        <div class="analysis-two-col">
+          
+          <!-- LEFT BOX: AFFORDANCE ANALYSIS -->
+          <div class="analysis-box">
+            <div class="box-header affordance">
+              <div class="box-header-title">
+                <span>🔍</span>
+                <span>Affordance Analysis</span>
+              </div>
+            </div>
+            <div class="affordance-list" id="affordance-content">
+              <!-- DYNAMIC CONTENT -->
+            </div>
+          </div>
+
+          <!-- RIGHT BOX: CLOSERS EVALUATION -->
+          <div class="analysis-box">
+            <div class="box-header closers">
+              <div class="box-header-title">
+                <span>👥</span>
+                <span>CLOSERS Principles</span>
+              </div>
+              <div class="closers-spectrum-bar" aria-hidden="true">
+                <span class="c-chip" style="background:#dc2626; color:#fff;" title="Convenience">C</span>
+                <span class="c-chip" style="background:#f97316; color:#fff;" title="Loss Avoidance">L</span>
+                <span class="c-chip" style="background:#facc15; color:#0f172a;" title="Own Identity">O</span>
+                <span class="c-chip" style="background:#16a34a; color:#fff;" title="Status">S</span>
+                <span class="c-chip" style="background:#0284c7; color:#fff;" title="Emotion">E</span>
+                <span class="c-chip" style="background:#1e3a8a; color:#fff;" title="Recognition">R</span>
+                <span class="c-chip" style="background:#7c3aed; color:#fff;" title="Stickiness">S</span>
+              </div>
+            </div>
+            <div class="closers-grid" id="closers-content">
+              <!-- DYNAMIC CONTENT -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BOTTOM THREE COLUMNS: WORKS / PROBLEMS / IMPROVEMENT -->
+        <div class="cards-three-col">
+          
+          <div class="eval-card works">
+            <div class="card-title works">
+              <span>🟢</span>
+              <span>What Works</span>
+            </div>
+            <ul class="eval-list" id="works-list">
+              <!-- DYNAMIC CONTENT -->
+            </ul>
+          </div>
+
+          <div class="eval-card problems">
+            <div class="card-title problems">
+              <span>🔴</span>
+              <span>What Doesn't Work</span>
+            </div>
+            <ul class="eval-list" id="problems-list">
+              <!-- DYNAMIC CONTENT -->
+            </ul>
+          </div>
+
+          <div class="eval-card improvement">
+            <div class="card-title improvement">
+              <span>🔵</span>
+              <span>Improvement</span>
+            </div>
+            <p style="font-size: 11px; color: #334155; line-height: 1.4;" id="improvement-text">
+              <!-- DYNAMIC TEXT -->
+            </p>
+            <div class="flow-box" id="flow-box">
+              <span class="flow-label">Suggested Flow</span>
+              <div class="flow-steps" id="flow-steps">
+                <!-- DYNAMIC FLOW STEPS -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BOTTOM WHY IT MATTERS CALLOUT -->
+        <div class="why-matters-card">
+          <span class="why-matters-icon">⭐️</span>
+          <div class="why-matters-text" id="why-matters-text">
+            <strong>Why it matters:</strong> Correct address is foundational. Getting it right first prevents frustration, wasted time, and potential order mistakes.
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- FOOTER NAVIGATION BAR -->
+    <footer class="slide-footer">
+      <div class="footer-shortcuts">
+        Shortcuts: <strong>1 - 5</strong> Select Hotspot | <strong>← / →</strong> Navigation | <strong>R</strong> Reset
+      </div>
+      <div class="footer-brand">
+        GrabFood UX Analysis • Affordance & CLOSERS Framework
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- VANILLA JAVASCRIPT & INTERACTION ENGINE -->
+  <script>
+    // CLOSERS PRINCIPLES CONFIGURATION WITH ATTACHED PALETTE & TAGLINES
+    const CLOSERS_MAP = {
+      C: { code: "C", name: "Convenience", tagline: "The Path of Least Resistance", bg: "#dc2626", text: "#ffffff" },
+      L: { code: "L", name: "Loss Avoidance", tagline: "Non-Loss > Gain", bg: "#f97316", text: "#ffffff" },
+      O: { code: "O", name: "Own Identity", tagline: "Tribes & Ties \"US\"", bg: "#facc15", text: "#0f172a" },
+      S_STATUS: { code: "S", name: "Status", tagline: "Climbing the Ladder", bg: "#16a34a", text: "#ffffff" },
+      E: { code: "E", name: "Emotion", tagline: "Feel First, Think Later", bg: "#0284c7", text: "#ffffff" },
+      R: { code: "R", name: "Recognition", tagline: "The Validation Magnet", bg: "#1e3a8a", text: "#ffffff" },
+      S_STICKINESS: { code: "S", name: "Stickiness", tagline: "Hooked by Commitment", bg: "#7c3aed", text: "#ffffff" }
+    };
+
+    // HOTSPOT DATA OBJECT (NEUTRAL PRINCIPLES OMITTED)
+    const hotspotData = {
+      1: {
+        id: 1,
+        title: "Delivery Address (Location Selector)",
+        subtitle: "Context before content",
+        targetId: "target-address",
+        affordance: {
+          affordance: "Users can view and change the delivery address.",
+          signifier: "Weak. Address text and dropdown arrow indicate selectability, but are visually overshadowed by promotional banners.",
+          cost: "Low direct interaction cost, but very high friction if users notice wrong location only after browsing or cart building.",
+          gaver: "Perceptible affordance with weak signifier and poor visual priority.",
+          discoverability: "Visible at top, but task importance is under-signified compared to flashing deals."
+        },
+        closers: [
+          { key: "C", state: "Weak", statusClass: "badge-red", icon: "❌" },
+          { key: "L", state: "Missed opportunity", statusClass: "badge-red", icon: "❌" },
+          { key: "E", state: "Mixed", statusClass: "badge-amber", icon: "⚠️" }
+        ],
+        works: [
+          "Address is always visible at the top bar.",
+          "Dropdown arrow indicates it can be changed.",
+          "Persistent location throughout the ordering session."
+        ],
+        problems: [
+          "Promotions dominate visual attention over location.",
+          "Interface assumes pre-selected address is correct.",
+          "Users may browse unsuitable restaurants before realizing location error.",
+          "Promotions precede context verification."
+        ],
+        improvementText: "Ask users to confirm or change the delivery address BEFORE showing flash deals.",
+        flowSteps: ["Confirm Address", "Show Nearby", "Flash Deals"],
+        whyItMatters: "Correct address is foundational. Getting it right first prevents frustration, wasted time, and potential order mistakes."
+      },
+      2: {
+        id: 2,
+        title: "Flash Deals Banner",
+        subtitle: "Promotion dominates task context",
+        targetId: "target-banner",
+        affordance: {
+          affordance: "Banner presents a list of discounted restaurants and appears actionable.",
+          signifier: "Very strong. Vibrant orange background, central placement, and bold discount copy.",
+          cost: "Low tap cost, but diverts user focus away from location verification.",
+          gaver: "Perceptible affordance with high visual dominance.",
+          discoverability: "Extremely high discoverability upon opening the page."
+        },
+        closers: [
+          { key: "C", state: "Strong", statusClass: "badge-green", icon: "✅" },
+          { key: "L", state: "Strong", statusClass: "badge-green", icon: "✅" },
+          { key: "E", state: "Strong", statusClass: "badge-green", icon: "✅" },
+          { key: "R", state: "Weak", statusClass: "badge-red", icon: "❌" },
+          { key: "S_STICKINESS", state: "Moderate", statusClass: "badge-blue", icon: "⚡" }
+        ],
+        works: [
+          "Promotion is immediately discoverable upon opening.",
+          "Restaurant list is directly connected to the promotional offer.",
+          "25% discount value is bold and easy to understand."
+        ],
+        problems: [
+          "Promotion interrupts location verification.",
+          "Dominant visual treatment competes with primary task.",
+          "Encourages browsing before verifying delivery feasibility."
+        ],
+        improvementText: "Show the flash-deals panel only after delivery location is confirmed.",
+        flowSteps: ["Confirm Address", "Load Local Deals", "Personalized Deals"],
+        whyItMatters: "Promotional urgency drives engagement, but pushing deals before verifying delivery context leads to abandoned carts when deals aren't available at user's location."
+      },
+      3: {
+        id: 3,
+        title: "Countdown Timer",
+        subtitle: "Urgency converts attention into action",
+        targetId: "target-timer",
+        affordance: {
+          affordance: "Display-only content communicating time sensitivity.",
+          signifier: "Large numeric format inside dark box strongly signals urgency.",
+          cost: "No direct click cost (display only), but creates psychological pressure.",
+          gaver: "Correct rejection if treated as display-only content.",
+          discoverability: "High visual contrast inside timer container."
+        },
+        closers: [
+          { key: "L", state: "Strong", statusClass: "badge-green", icon: "✅" },
+          { key: "E", state: "Strong", statusClass: "badge-green", icon: "✅" },
+          { key: "S_STICKINESS", state: "Moderate", statusClass: "badge-blue", icon: "⚡" }
+        ],
+        works: [
+          "Remaining offer duration is immediately understandable.",
+          "Timer creates a clear temporal boundary.",
+          "Supports the flash-sale proposition effectively."
+        ],
+        problems: [
+          "Creates pressure before users confirm basic order parameters.",
+          "May encourage impulsive selection over preference fit.",
+          "Risk of misleading design if timer resets or is non-genuine."
+        ],
+        improvementText: "Display timer only after address confirmation and state explicitly what expires when it reaches zero.",
+        flowSteps: ["Confirm Location", "Active Countdown", "Guaranteed Savings"],
+        whyItMatters: "Urgency accelerates decision-making, but must be paired with accurate context so users don't rush into ordering errors."
+      },
+      4: {
+        id: 4,
+        title: "Minimum Spend Requirement",
+        subtitle: "Hidden thresholds friction",
+        targetId: "target-minspend",
+        affordance: {
+          affordance: "Informational constraint; sets qualification boundary for discount eligibility.",
+          signifier: "Small muted text badge beneath timer.",
+          cost: "High cognitive cost if user reaches checkout and realizes cart is under S$12.",
+          gaver: "Perceptible constraint with low visual prominence.",
+          discoverability: "Low visual weight compared to 25% OFF text."
+        },
+        closers: [
+          { key: "C", state: "Weak", statusClass: "badge-red", icon: "❌" },
+          { key: "L", state: "Moderate", statusClass: "badge-blue", icon: "⚡" },
+          { key: "E", state: "Mixed", statusClass: "badge-amber", icon: "⚠️" }
+        ],
+        works: [
+          "Explicitly states condition before user enters restaurant page.",
+          "Prevents total surprise at cart checkout stage."
+        ],
+        problems: [
+          "Subdued visual weight makes it easy to miss relative to discount.",
+          "Doesn't indicate how typical meal prices compare to threshold.",
+          "Causes disappointment when single-item orders fail eligibility."
+        ],
+        improvementText: "Enhance visual prominence of min-spend text and provide progress guidance inside restaurant cards.",
+        flowSteps: ["Clear Terms", "Item Progress Helper", "Seamless Checkout"],
+        whyItMatters: "Disclosing conditions early builds trust, but under-signifying them causes disappointment when discounts fail at checkout."
+      },
+      5: {
+        id: 5,
+        title: "Restaurant Row & Pricing",
+        subtitle: "Anchoring and transparency",
+        targetId: "target-restaurant",
+        affordance: {
+          affordance: "Tappable container leading to restaurant menu page.",
+          signifier: "Rounded card elevation, food thumbnail, rating, price, and cuisine tags.",
+          cost: "Low tap cost; high clarity of options.",
+          gaver: "Perceptible affordance with rich multi-attribute signifiers.",
+          discoverability: "High; familiar card layout maps to food delivery mental models."
+        },
+        closers: [
+          { key: "C", state: "Strong", statusClass: "badge-green", icon: "✅" },
+          { key: "L", state: "Strong", statusClass: "badge-green", icon: "✅" },
+          { key: "E", state: "Strong", statusClass: "badge-green", icon: "✅" },
+          { key: "R", state: "Strong", statusClass: "badge-green", icon: "✅" },
+          { key: "S_STICKINESS", state: "Moderate", statusClass: "badge-blue", icon: "⚡" }
+        ],
+        works: [
+          "Clear visual hierarchy: food photo, rating (4.7 ★), cuisine tag, delivery price.",
+          "Strikethrough delivery fee (S$3.40 S$6.40) anchors savings value.",
+          "Busy status warning sets accurate wait expectations early."
+        ],
+        problems: [
+          "Busy warnings use subtle grey text easily overlooked while scrolling.",
+          "High density of metadata creates cognitive clutter during fast scanning."
+        ],
+        improvementText: "Use color-coded badges for busy restaurant status and highlight total estimated savings on delivery.",
+        flowSteps: ["Card Comparison", "Prominent Wait Badge", "Informed Select"],
+        whyItMatters: "Transparent fees and clear wait times allow confident comparison, preventing order cancellation due to unexpected delays."
+      }
+    };
+
+    let activeHotspotId = 1;
+
+    // DOM ELEMENTS
+    const hotspotBtns = document.querySelectorAll('.hotspot-btn');
+    const navNumBtns = document.querySelectorAll('.nav-num-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const targetOverlay = document.getElementById('target-overlay');
+    const connectorLine = document.getElementById('connector-line');
+    const phoneScreen = document.getElementById('phone-screen');
+
+    // PANEL DOM ELEMENTS
+    const panelBadge = document.getElementById('panel-badge');
+    const panelTitle = document.getElementById('panel-title');
+    const panelSubtitle = document.getElementById('panel-subtitle');
+    const affordanceContent = document.getElementById('affordance-content');
+    const closersContent = document.getElementById('closers-content');
+    const worksList = document.getElementById('works-list');
+    const problemsList = document.getElementById('problems-list');
+    const improvementText = document.getElementById('improvement-text');
+    const flowSteps = document.getElementById('flow-steps');
+    const whyMattersText = document.getElementById('why-matters-text');
+
+    // ACTIVATE HOTSPOT FUNCTION
+    function activateHotspot(id) {
+      activeHotspotId = id;
+      const data = hotspotData[id];
+
+      // Update button active states
+      hotspotBtns.forEach(btn => {
+        const isAct = parseInt(btn.dataset.id) === id;
+        btn.classList.toggle('active', isAct);
+        btn.setAttribute('aria-selected', isAct ? 'true' : 'false');
+      });
+
+      navNumBtns.forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.id) === id);
+      });
+
+      // Update Overlay on Phone: HIGHLIGHT THE WHOLE ROW EDGE TO EDGE WITHOUT BORDER
+      const targetEl = document.getElementById(data.targetId);
+      if (targetEl && phoneScreen) {
+        const phoneRect = phoneScreen.getBoundingClientRect();
+        const targetRect = targetEl.getBoundingClientRect();
+
+        const top = targetRect.top - phoneRect.top;
+        const height = targetRect.height;
+
+        targetOverlay.style.top = top + 'px';
+        targetOverlay.style.left = '0px';
+        targetOverlay.style.width = '100%';
+        targetOverlay.style.height = height + 'px';
+        targetOverlay.classList.add('active');
+      }
+
+      // Update Connector Line
+      updateConnectorLine();
+
+      // Render Panel Header
+      panelBadge.textContent = data.id;
+      panelTitle.textContent = data.title;
+      panelSubtitle.textContent = data.subtitle;
+
+      // Render Affordance Analysis
+      affordanceContent.innerHTML = `
+        <div class="aff-item"><span class="aff-label">Affordance</span><span class="aff-value">${data.affordance.affordance}</span></div>
+        <div class="aff-item"><span class="aff-label">Signifier</span><span class="aff-value">${data.affordance.signifier}</span></div>
+        <div class="aff-item"><span class="aff-label">Affordance Cost</span><span class="aff-value">${data.affordance.cost}</span></div>
+        <div class="aff-item"><span class="aff-label">Gaver Classification</span><span class="aff-value">${data.affordance.gaver}</span></div>
+        <div class="aff-item"><span class="aff-label">Discoverability</span><span class="aff-value">${data.affordance.discoverability}</span></div>
+      `;
+
+      // Render CLOSERS Principles (ONLY ACTIVE/NON-NEUTRAL PRINCIPLES WITH EXACT COLORS)
+      closersContent.innerHTML = data.closers.map(item => {
+        const meta = CLOSERS_MAP[item.key];
+        if (!meta) return '';
+        return `
+          <div class="closer-row">
+            <div class="closer-name-group">
+              <span class="closer-code" style="background-color: ${meta.bg}; color: ${meta.text};">${meta.code}</span>
+              <div class="closer-text-col">
+                <span class="closer-title">${meta.name}</span>
+                <span class="closer-tagline">${meta.tagline}</span>
+              </div>
+            </div>
+            <span class="status-badge ${item.statusClass}">${item.icon} ${item.state}</span>
+          </div>
+        `;
+      }).join('');
+
+      // Render Works / Problems / Improvement
+      worksList.innerHTML = data.works.map(w => `<li>${w}</li>`).join('');
+      problemsList.innerHTML = data.problems.map(p => `<li>${p}</li>`).join('');
+      improvementText.textContent = data.improvementText;
+
+      flowSteps.innerHTML = data.flowSteps.map((s, idx) => `
+        <span class="flow-step-pill">${s}</span>
+        ${idx < data.flowSteps.length - 1 ? '<span class="flow-arrow">➔</span>' : ''}
+      `).join('');
+
+      whyMattersText.innerHTML = `<strong>Why it matters:</strong> ${data.whyItMatters}`;
+    }
+
+    // CONNECTOR LINE POSITION CALCULATOR
+    function updateConnectorLine() {
+      const activeBtn = document.querySelector(`.hotspot-btn[data-id="${activeHotspotId}"]`);
+      const targetEl = document.getElementById(hotspotData[activeHotspotId].targetId);
+      const leftSection = document.querySelector('.left-section');
+
+      if (activeBtn && targetEl && leftSection) {
+        const secRect = leftSection.getBoundingClientRect();
+        const btnRect = activeBtn.getBoundingClientRect();
+        const targetRect = targetEl.getBoundingClientRect();
+
+        const x1 = btnRect.left - secRect.left;
+        const y1 = btnRect.top + (btnRect.height / 2) - secRect.top;
+        const x2 = targetRect.right - secRect.left;
+        const y2 = targetRect.top + (targetRect.height / 2) - secRect.top;
+
+        connectorLine.setAttribute('x1', x1);
+        connectorLine.setAttribute('y1', y1);
+        connectorLine.setAttribute('x2', x2);
+        connectorLine.setAttribute('y2', y2);
+      }
+    }
+
+    // RESIZE LISTENER FOR FLUID CONNECTORS
+    window.addEventListener('resize', () => {
+      activateHotspot(activeHotspotId);
+    });
+
+    // EVENT LISTENERS
+    hotspotBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        activateHotspot(parseInt(btn.dataset.id));
+      });
+    });
+
+    navNumBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        activateHotspot(parseInt(btn.dataset.id));
+      });
+    });
+
+    resetBtn.addEventListener('click', () => {
+      activateHotspot(1);
+    });
+
+    // KEYBOARD NAVIGATION ACCESSIBILITY
+    window.addEventListener('keydown', (e) => {
+      if (e.key >= '1' && e.key <= '5') {
+        activateHotspot(parseInt(e.key));
+      } else if (e.key === 'ArrowRight' || e.key === ' ') {
+        activateHotspot(activeHotspotId < 5 ? activeHotspotId + 1 : 1);
+      } else if (e.key === 'ArrowLeft') {
+        activateHotspot(activeHotspotId > 1 ? activeHotspotId - 1 : 5);
+      } else if (e.key === 'r' || e.key === 'R') {
+        activateHotspot(1);
+      }
+    });
+
+    // INIT ON LOAD
+    window.onload = () => {
+      activateHotspot(1);
+    };
+  </script>
+</body>
+</html>

@@ -1,6 +1,8 @@
 {
-  "name": "Persuasive Technology Lecture Deck",
-  "description": "An interactive university-grade HCI lecture deck exploring Convenience, Loss Avoidance, and Status persuasive UI patterns.",
+  "name": "GrabFood - Affordance & CLOSERS Analysis",
+  "description": "Interactive 16:9 presentation slide analyzing GrabFood UX using Affordance and CLOSERS principles.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
