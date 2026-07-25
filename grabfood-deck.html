@@ -16,6 +16,10 @@
   --as-is-bg:#fbeae8;
   --improved:#144e9e;
   --improved-bg:#e9f0fb;
+  --proto:#6b3fa0;
+  --proto-bg:#f1eaf9;
+  --assess:#0f6e5c;
+  --assess-bg:#e3efe9;
   --shadow: 0 1px 2px rgba(16,21,31,0.06), 0 12px 28px -14px rgba(16,21,31,0.25);
 }
 
@@ -31,6 +35,10 @@
     --as-is-bg:#2a1613;
     --improved:#6fa3f2;
     --improved-bg:#101c2e;
+    --proto:#b58cf0;
+    --proto-bg:#221a30;
+    --assess:#4fb89b;
+    --assess-bg:#1e2e28;
     --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 20px 40px -18px rgba(0,0,0,0.6);
   }
 }
@@ -45,6 +53,10 @@
   --as-is-bg:#2a1613;
   --improved:#6fa3f2;
   --improved-bg:#101c2e;
+  --proto:#b58cf0;
+  --proto-bg:#221a30;
+  --assess:#4fb89b;
+  --assess-bg:#1e2e28;
   --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 20px 40px -18px rgba(0,0,0,0.6);
 }
 :root[data-theme="light"]{
@@ -58,6 +70,10 @@
   --as-is-bg:#fbeae8;
   --improved:#144e9e;
   --improved-bg:#e9f0fb;
+  --proto:#6b3fa0;
+  --proto-bg:#f1eaf9;
+  --assess:#0f6e5c;
+  --assess-bg:#e3efe9;
   --shadow: 0 1px 2px rgba(16,21,31,0.06), 0 12px 28px -14px rgba(16,21,31,0.25);
 }
 
@@ -178,6 +194,57 @@ h1 em{
 }
 .card.is-as-is .card-label{background:var(--as-is-bg);color:var(--as-is);}
 .card.is-improved .card-label{background:var(--improved-bg);color:var(--improved);}
+.card.is-proto .card-label{background:var(--proto-bg);color:var(--proto);}
+.card.is-assess .card-label{background:var(--assess-bg);color:var(--assess);}
+
+.card.is-assess .thumb{ align-items:center; }
+
+/* three-up row: v1 prototype, assessment, v2 prototype */
+.trio-row{
+  grid-column:1 / -1;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+@media (max-width:900px){
+  .trio-row{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:680px){
+  .trio-row{ grid-template-columns:1fr; }
+}
+
+.report-card{
+  width:100%;
+  max-width:200px;
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 8px 22px -8px rgba(0,0,0,0.25), 0 0 0 1px #eceee9;
+  overflow:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+.report-topbar{
+  display:flex;
+  gap:4px;
+  padding:8px 10px;
+  border-bottom:1px solid #eceee9;
+}
+.report-topbar span{
+  width:6px;height:6px;border-radius:50%;
+  background:#dde2dc;
+}
+.report-body{padding:12px 14px 14px;}
+.report-eyebrow{
+  font:700 6px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--assess);
+  margin-bottom:5px;
+}
+.report-title{font-size:10.5px;font-weight:700;color:#1b211d;line-height:1.3;}
+.report-stats{display:flex;gap:10px;margin-top:10px;}
+.report-stats div{display:flex;flex-direction:column;gap:1px;}
+.report-stats b{font-size:13px;color:#1b211d;font-family:Georgia,serif;}
+.report-stats small{font-size:6px;color:#7b8177;}
 
 /* thumbnail mockup */
 .thumb{
@@ -303,6 +370,8 @@ h1 em{
 }
 .is-as-is .card-cta{color:var(--as-is);}
 .is-improved .card-cta{color:var(--improved);}
+.is-proto .card-cta{color:var(--proto);}
+.is-assess .card-cta{color:var(--assess);}
 .card-cta svg{width:13px;height:13px;transition:transform 180ms ease;}
 .card:hover .card-cta svg{transform:translateX(3px);}
 
@@ -391,6 +460,82 @@ footer a{color:inherit;}
         <div class="card-cta">Open the after state <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </div>
     </a>
+
+    <div class="trio-row">
+    <a class="card is-proto" href="grabfood-prototype.html">
+      <div class="card-label"><span>Prototype &middot; v1</span><span>03</span></div>
+      <div class="thumb">
+        <div class="phone">
+          <div class="phone-bar"><span>12:36</span><span>5G 52%</span></div>
+          <div class="phone-address" style="border-bottom:none;padding-top:8px;">
+            <div class="lbl">Deliver now</div>
+            <div class="row"><b style="font-size:9.5px;">Confirm your address</b></div>
+          </div>
+          <div style="margin:6px 8px 0;height:56px;border-radius:6px;background:repeating-linear-gradient(0deg,#eef1f5 0 1px,transparent 1px 10px),repeating-linear-gradient(90deg,#eef1f5 0 1px,transparent 1px 10px),#f6f8fa;display:flex;align-items:center;justify-content:center;font-size:14px;">📍</div>
+          <div style="margin:6px 8px 0;padding:6px 7px;border:1px solid #e7e9ee;border-radius:8px;display:flex;align-items:center;gap:5px;">
+            <span style="font-size:9px;">📍</span>
+            <span style="flex:1;font-size:6.5px;font-weight:700;color:#1a1f2b;">School (Campus)</span>
+            <span style="font-size:5.5px;font-weight:700;color:#1a63c9;border:1px solid #1a63c9;border-radius:8px;padding:1px 4px;">Change</span>
+          </div>
+        </div>
+        <div class="hotspot-dot"><span>&#9654;</span></div>
+      </div>
+      <div class="card-body">
+        <h2>Clickable prototype</h2>
+        <p>The first pass as a working phone prototype &mdash; confirm the address, browse the flash deal, and scroll the restaurant list end to end.</p>
+        <div class="card-cta">Try the prototype <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+
+    <a class="card is-assess" href="grabfood_assessment.html">
+      <div class="card-label"><span>Assessment</span><span>&mdash;</span></div>
+      <div class="thumb">
+        <div class="report-card">
+          <div class="report-topbar"><span></span><span></span><span></span></div>
+          <div class="report-body">
+            <div class="report-eyebrow">PSD &middot; Legal Review</div>
+            <div class="report-title">GrabFood prototype, assessed against 28 PSD principles and 6 legal risk vectors</div>
+            <div class="report-stats">
+              <div><b>28</b><small>Evaluated</small></div>
+              <div><b>10</b><small>Met</small></div>
+              <div><b>36%</b><small>Score</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h2>PSD &amp; legal risk review</h2>
+        <p>Every screen scored against the Oinas&#8209;Kukkonen &amp; Harjumaa framework, reconciled against a manual audit, and cross&#8209;checked for manipulation and coercion risk.</p>
+        <div class="card-cta">Read the assessment <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+
+    <a class="card is-proto" href="grabfood-prototype-v2.html">
+      <div class="card-label"><span>Prototype &middot; v2</span><span>04</span></div>
+      <div class="thumb">
+        <div class="phone">
+          <div class="phone-bar"><span>12:36</span><span>5G 52%</span></div>
+          <div class="phone-address" style="border-bottom:none;padding-top:8px;">
+            <div class="lbl">Deliver now</div>
+            <div class="row"><b style="font-size:9.5px;">Confirm your address</b></div>
+          </div>
+          <div style="margin:6px 8px 0;height:56px;border-radius:6px;background:repeating-linear-gradient(0deg,#eef1f5 0 1px,transparent 1px 10px),repeating-linear-gradient(90deg,#eef1f5 0 1px,transparent 1px 10px),#f6f8fa;display:flex;align-items:center;justify-content:center;font-size:14px;">📍</div>
+          <div style="margin:6px 8px 0;padding:6px 7px;border:1px solid #e7e9ee;border-radius:8px;display:flex;align-items:center;gap:5px;">
+            <span style="font-size:9px;">📍</span>
+            <span style="flex:1;font-size:6.5px;font-weight:700;color:#1a1f2b;">School (Campus)</span>
+            <span style="font-size:5.5px;font-weight:700;color:#1a63c9;border:1px solid #1a63c9;border-radius:8px;padding:1px 4px;">Change</span>
+          </div>
+          <div style="margin:6px 8px 0;font-size:6px;color:#6a7180;">&#128269; Search &middot; &#9733; Reviews</div>
+        </div>
+        <div class="hotspot-dot"><span>&#9654;</span></div>
+      </div>
+      <div class="card-body">
+        <h2>Revised prototype</h2>
+        <p>Adds a working address search, per-restaurant review sheets, and an honest countdown &amp; min-spend tracker with live state.</p>
+        <div class="card-cta">Try the prototype <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+    </div>
   </div>
 </div>
 

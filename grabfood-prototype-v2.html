@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xrweuo98fv");
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrabFood – Prototype v2 (PSD + Legal revisions)</title>
+<style>
+:root{
+  --ink:#1a1f2b;
+  --grab-green:#00b14f;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  background:#2b2f3a;
+  font-family:var(--font-ui);
+  color:var(--ink);
+}
+
+.stage{
+  width:100%;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px 20px;
+}
+
+/* ==========================================================================
+   PHONE FRAME
+   ========================================================================== */
+.phone-frame{
+  position:relative;
+  width:375px;
+  height:812px;
+  background:#111417;
+  border-radius:44px;
+  padding:12px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.45);
+  flex-shrink:0;
+}
+
+.phone-screen{
+  position:relative;
+  width:100%;
+  height:100%;
+  background:#fff;
+  border-radius:32px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  font-size:12px;
+}
+
+/* -- status bar (persistent across screens) -- */
+.status-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 18px 2px;
+  font-weight:700;
+  font-size:13px;
+  color:#111;
+  flex-shrink:0;
+  position:relative;
+  z-index:10;
+  background:#fff;
+}
+.status-bar .status-icons{ display:flex; align-items:center; gap:5px; font-size:11px; }
+
+/* ==========================================================================
+   SCREEN STACK / NAVIGATION
+   ========================================================================== */
+.screen-viewport{
+  position:relative;
+  flex:1;
+  min-height:0;
+  overflow:hidden;
+}
+.screen{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  background:#fff;
+  transform:translateX(100%);
+  transition:transform 320ms cubic-bezier(.4,0,.2,1);
+  z-index:1;
+  pointer-events:none;
+  visibility:hidden;
+}
+.screen.active{
+  transform:translateX(0);
+  z-index:2;
+  pointer-events:auto;
+  visibility:visible;
+}
+
+/* ==========================================================================
+   SCREEN 1 — CONFIRM ADDRESS
+   ========================================================================== */
+.confirm-header{ padding:22px 20px 6px; flex-shrink:0; }
+.confirm-eyebrow{ font-size:11px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--grab-green); margin-bottom:6px; }
+.confirm-title{ font-size:22px; font-weight:800; margin:0; line-height:1.25; color:#111; }
+
+.confirm-body{ flex:1; padding:14px 20px 0; display:flex; flex-direction:column; min-height:0; }
+
+.map-placeholder{
+  height:170px;
+  border-radius:16px;
+  background:
+    linear-gradient(rgba(0,177,79,0.06), rgba(0,177,79,0.06)),
+    repeating-linear-gradient(0deg, #eef1f5 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, #eef1f5 0 1px, transparent 1px 28px),
+    #f6f8fa;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  position:relative;
+}
+.map-placeholder .pin-drop{
+  font-size:34px;
+  filter:drop-shadow(0 6px 6px rgba(0,0,0,0.18));
+  transform:translateY(-6px);
+}
+
+.address-card{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:16px;
+  padding:13px 14px;
+  border:1px solid #e7e9ee;
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 1px 3px rgba(20,25,40,0.06);
+  flex-shrink:0;
+}
+.address-card .pin{ font-size:20px; flex-shrink:0; }
+.address-card .addr-text{ min-width:0; flex:1; }
+.address-card .addr-name{ font-weight:800; font-size:14.5px; color:#111; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.address-card .addr-sub{ font-size:11.5px; color:#6a7180; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.change-btn{
+  appearance:none; border:1.5px solid #1a63c9; background:#fff; color:#1a63c9;
+  font-weight:800; font-size:11.5px; padding:6px 12px; border-radius:20px;
+  flex-shrink:0; cursor:pointer;
+}
+.change-btn:active{ background:#eaf2fd; }
+
+.confirm-hint{ font-size:12px; color:#6a7180; line-height:1.5; margin:14px 2px 0; }
+
+.confirm-footer{ padding:14px 20px 22px; flex-shrink:0; }
+.btn-primary{
+  width:100%; border:none; border-radius:14px; background:var(--grab-green); color:#fff;
+  font-weight:800; font-size:15px; padding:15px; cursor:pointer;
+}
+.btn-primary:active{ background:#00913f; }
+
+/* ==========================================================================
+   SCREEN 2 — CHANGE ADDRESS
+   ========================================================================== */
+.nav-bar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 14px 10px; flex-shrink:0;
+}
+.nav-back{
+  appearance:none; border:none; background:none; font-size:20px; color:#222;
+  cursor:pointer; width:26px; text-align:left; padding:0;
+}
+.nav-title{ font-weight:800; font-size:15px; color:#111; }
+
+.search-box{ padding:2px 16px 12px; flex-shrink:0; }
+.search-box input{
+  width:100%; border:1px solid #e1e4ea; background:#f5f6f9; border-radius:10px;
+  padding:10px 12px; font-size:13px; font-family:var(--font-ui); color:#6a7180;
+}
+
+.addr-list{ flex:1; overflow-y:auto; padding:0 12px 16px; display:flex; flex-direction:column; gap:8px; }
+.addr-item{
+  appearance:none; border:1px solid #e7e9ee; background:#fff; border-radius:12px;
+  padding:12px 12px; display:flex; align-items:center; gap:12px; cursor:pointer;
+  font-family:var(--font-ui); text-align:left;
+}
+.addr-item:active{ background:#f5f6f9; }
+.addr-item.is-current{ border-color:var(--grab-green); background:#f0faf3; }
+.addr-item-icon{ font-size:19px; flex-shrink:0; }
+.addr-item-text{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+.addr-item-text b{ font-size:13.5px; color:#111; }
+.addr-item-text small{ font-size:11.5px; color:#6a7180; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.addr-item-check{ margin-left:auto; color:var(--grab-green); font-weight:800; font-size:15px; flex-shrink:0; }
+
+/* ==========================================================================
+   SCREEN 3 — HOME / RESTAURANT LIST
+   ========================================================================== */
+.app-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 14px 12px;
+  gap:8px;
+  flex-shrink:0;
+}
+.app-header .back-arrow{ font-size:19px; color:#222; flex-shrink:0; opacity:0.35; }
+.address-block{ min-width:0; flex:1; cursor:pointer; }
+.address-block .deliver-now{ font-size:11px; color:#6a7180; }
+.address-block .address-row{
+  display:flex; align-items:center; gap:5px;
+  font-weight:800; font-size:14px; color:#111; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.address-block .confirm-badge{
+  display:inline-flex; align-items:center; gap:3px;
+  background:#e9f8ef; color:#177a3f; font-weight:800; font-size:10.5px;
+  padding:2px 7px; border-radius:20px; margin-left:2px; white-space:nowrap; flex-shrink:0;
+}
+.address-block .change-link{ font-size:11px; color:#1a63c9; font-weight:700; margin-top:2px; }
+.app-header .header-icons{ display:flex; align-items:center; gap:12px; flex-shrink:0; font-size:17px; color:#333; }
+.app-header .header-icons span{ cursor:pointer; }
+
+.flash-banner{
+  position:relative;
+  margin:0 10px 10px;
+  border-radius:18px 18px 4px 4px;
+  background:linear-gradient(135deg,#ff8a1e,#ff6a00);
+  color:#fff;
+  padding:16px 12px 14px;
+  text-align:center;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.flash-banner .grabber{
+  width:36px; height:4px; border-radius:3px; background:rgba(255,255,255,0.6);
+  margin:0 auto 9px;
+}
+.flash-banner .flash-title{ font-size:16px; font-weight:800; margin-bottom:2px; }
+.flash-banner .flash-sub{ font-size:11px; font-weight:600; color:#ffe4cc; margin-bottom:10px; }
+.countdown{ display:flex; align-items:center; justify-content:center; gap:4px; }
+.countdown .seg{
+  background:#3a1400; color:#fff; font-weight:800; font-size:15px;
+  padding:5px 9px; border-radius:6px; min-width:28px;
+  font-variant-numeric:tabular-nums;
+}
+.countdown .colon{ font-weight:800; }
+.countdown-label{ font-size:10px; color:#ffe4cc; margin-top:6px; font-weight:600; }
+
+.min-spend{ padding:7px 16px 9px; flex-shrink:0; }
+.min-spend .ms-label{ font-size:11.5px; color:#3a1f00; font-weight:700; margin-bottom:5px; }
+.min-spend .ms-label strong{ color:#ff6a00; }
+
+.restaurant-list{ flex:1; overflow-y:auto; padding:2px 14px 16px; -webkit-overflow-scrolling:touch; }
+.restaurant-row{
+  display:flex; gap:9px; padding:10px 9px; margin-bottom:8px;
+  border:1px solid #e7e9ee; border-radius:11px; background:#fff;
+  box-shadow:0 1px 3px rgba(20,25,40,0.06); cursor:pointer;
+  transition:transform 120ms ease, box-shadow 120ms ease;
+}
+.restaurant-row:active{ transform:scale(0.98); box-shadow:0 1px 2px rgba(20,25,40,0.08); }
+.restaurant-row .thumb{
+  width:56px; height:56px; border-radius:11px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; color:#fff; font-weight:700;
+}
+.restaurant-row .info{ min-width:0; flex:1; }
+.restaurant-row .rname{ font-weight:800; font-size:12.5px; color:#111; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.restaurant-row .rmeta{ font-size:11px; color:#4a5164; margin-top:2px; display:flex; align-items:center; gap:3px; white-space:nowrap; overflow:hidden; }
+.restaurant-row .star{ color:#ffb020; }
+.restaurant-row .price-line{ font-size:11px; margin-top:3px; display:flex; align-items:center; gap:6px; color:#4a5164; }
+.restaurant-row .price-line .disc{ color:#ff6a00; font-weight:700; display:flex; align-items:center; gap:2px;}
+.off-badge{ background:#fff1e2; color:#c94b1c; font-weight:800; font-size:9.5px; padding:1px 5px; border-radius:5px; }
+.restaurant-row .busy-note{ font-size:10.5px; color:#a4650c; margin-top:4px; display:flex; align-items:center; gap:3px; font-weight:700; }
+.see-reviews{ background:none; border:none; padding:0; font-size:10px; color:#1a63c9; font-weight:700; cursor:pointer; text-decoration:underline; }
+
+/* ==========================================================================
+   Reviews modal (Verifiability)
+   ========================================================================== */
+.reviews-overlay{
+  position:absolute; inset:0; background:rgba(10,12,16,0.42); z-index:30;
+  display:none; align-items:flex-end;
+}
+.reviews-overlay.show{ display:flex; }
+.reviews-sheet{
+  background:#fff; width:100%; border-radius:18px 18px 0 0; padding:16px 18px 20px; max-height:60%;
+  overflow-y:auto;
+}
+.reviews-sheet h3{ margin:0 0 2px; font-size:15px; }
+.reviews-sheet .rv-sub{ font-size:11px; color:#6a7180; margin-bottom:12px; }
+.reviews-sheet .rv-item{ border-top:1px solid #eef0f4; padding:10px 0; font-size:12px; color:#333; }
+.reviews-sheet .rv-item b{ font-size:11.5px; color:#111; display:block; margin-bottom:2px; }
+.rv-close{
+  appearance:none; border:none; background:#f0f1f4; color:#333; font-weight:800;
+  width:100%; padding:10px; border-radius:10px; margin-top:10px; cursor:pointer; font-size:12.5px;
+}
+
+/* ==========================================================================
+   Trust footer (Real-World Feel)
+   ========================================================================== */
+.trust-footer{
+  flex-shrink:0; padding:10px 18px 14px; text-align:center; font-size:10px; color:#9aa1ae;
+  border-top:1px solid #eef0f4;
+}
+.trust-footer a{ color:#6a7180; text-decoration:underline; }
+
+.thumb.tw{ background:linear-gradient(135deg,#d8c9a3,#a98b52); }
+.thumb.tt{ background:linear-gradient(135deg,#f2c14e,#c98a1a); }
+.thumb.tj{ background:linear-gradient(135deg,#4a4038,#241c16); }
+.thumb.ti{ background:#7a1414; }
+.thumb.to{ background:linear-gradient(135deg,#ffe9b0,#ffd27a); color:#c94b1c; }
+.thumb.tp{ background:linear-gradient(135deg,#9fd6a0,#5aa860); }
+.thumb.tk{ background:linear-gradient(135deg,#e6b8c4,#c65a7a); }
+
+@media (max-width: 460px){
+  .stage{ padding:0; }
+  .phone-frame{ width:100vw; height:100vh; border-radius:0; padding:0; box-shadow:none; }
+  .phone-screen{ border-radius:0; }
+}
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="phone-frame">
+    <div class="phone-screen">
+
+      <!-- status bar (persistent) -->
+      <div class="status-bar">
+        <span>12:36</span>
+        <span class="status-icons">📶 5G 🔋52</span>
+      </div>
+
+      <div class="screen-viewport">
+
+        <!-- ====================================================================
+             SCREEN 1 — CONFIRM ADDRESS (entry point, gates everything else)
+             ==================================================================== -->
+        <div class="screen active" id="screen-confirm">
+          <div class="confirm-header">
+            <div class="confirm-eyebrow">Deliver now</div>
+            <h1 class="confirm-title">Confirm your delivery address</h1>
+          </div>
+          <div class="confirm-body">
+            <div class="map-placeholder">
+              <span class="pin-drop">📍</span>
+            </div>
+            <div class="address-card">
+              <span class="pin">📍</span>
+              <div class="addr-text">
+                <div class="addr-name" id="confirmAddrName">School (Campus)</div>
+                <div class="addr-sub" id="confirmAddrSub">51 Stamford Rd, Singapore 178895</div>
+              </div>
+              <button class="change-btn" id="btnChangeFromConfirm">Change</button>
+            </div>
+            <p class="confirm-hint">We'll only show restaurants, delivery fees, and delivery times for this address.</p>
+          </div>
+          <div class="confirm-footer">
+            <button class="btn-primary" id="btnConfirm">Confirm address</button>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             SCREEN 2 — CHANGE ADDRESS
+             ==================================================================== -->
+        <div class="screen" id="screen-change">
+          <div class="nav-bar">
+            <button class="nav-back" id="btnChangeBack" aria-label="Back">←</button>
+            <div class="nav-title">Choose delivery address</div>
+            <span style="width:26px"></span>
+          </div>
+          <div class="search-box">
+            <input type="text" id="addrSearch" placeholder="Search for an address">
+          </div>
+          <div class="addr-list" id="addrList">
+            <button class="addr-item" data-name="School (Campus)" data-sub="51 Stamford Rd, Singapore 178895">
+              <span class="addr-item-icon">🏫</span>
+              <span class="addr-item-text"><b>School (Campus)</b><small>51 Stamford Rd, Singapore 178895</small></span>
+              <span class="addr-item-check" aria-hidden="true"></span>
+            </button>
+            <button class="addr-item" data-name="Home" data-sub="12 Tampines St 41, Singapore 529204">
+              <span class="addr-item-icon">🏠</span>
+              <span class="addr-item-text"><b>Home</b><small>12 Tampines St 41, Singapore 529204</small></span>
+              <span class="addr-item-check" aria-hidden="true"></span>
+            </button>
+            <button class="addr-item" data-name="Office" data-sub="1 Raffles Place, Singapore 048616">
+              <span class="addr-item-icon">🏢</span>
+              <span class="addr-item-text"><b>Office</b><small>1 Raffles Place, Singapore 048616</small></span>
+              <span class="addr-item-check" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             SCREEN 3 — HOME / RESTAURANT LIST (only reachable after confirming)
+             ==================================================================== -->
+        <div class="screen" id="screen-home">
+          <div class="app-header">
+            <span class="back-arrow" aria-hidden="true">←</span>
+            <div class="address-block" id="homeAddressBlock">
+              <div class="deliver-now">Deliver now</div>
+              <div class="address-row">
+                <span id="homeAddrName">School (Campus)</span>
+                <span class="confirm-badge">✓ Confirmed</span>
+              </div>
+              <div class="change-link">Not right? Change address</div>
+            </div>
+            <div class="header-icons">
+              <span aria-hidden="true">♡</span>
+              <span aria-hidden="true">🧾</span>
+            </div>
+          </div>
+
+          <div class="flash-banner">
+            <div class="grabber"></div>
+            <div class="flash-title" id="homeFlashTitle">25% off near School (Campus)</div>
+            <div class="flash-sub">Prices and this offer apply to your confirmed delivery address</div>
+            <div class="countdown" id="countdown">
+              <span class="seg" id="segHr">02</span><span class="colon">:</span><span class="seg" id="segMin">14</span>
+            </div>
+            <div class="countdown-label" id="countdownLabel">Ends 6:00pm today · resets daily · applies to this order only</div>
+          </div>
+
+          <div class="min-spend">
+            <div class="ms-label" id="msLabel">Spend <strong>S$12.00 or more</strong> in a single order to unlock 25% off — pick a restaurant below to start your order</div>
+          </div>
+
+          <div class="restaurant-list">
+            <div class="restaurant-row" tabindex="0">
+              <div class="thumb tw">🍽️</div>
+              <div class="info">
+                <div class="rname">Oh Wunder - Bras Basah Complex</div>
+                <div class="rmeta"><span class="star">★</span> 4.7 (122) · $$$$ · Western <button class="see-reviews" data-rid="wunder">See reviews</button></div>
+                <div class="price-line">
+                  <span class="disc">🔗 S$3.40</span><span class="off-badge">-25%</span>
+                  <span>39 mins</span>
+                </div>
+              </div>
+            </div>
+            <div class="restaurant-row" tabindex="0">
+              <div class="thumb tt">🍜</div>
+              <div class="info">
+                <div class="rname">87 Just Thai - Killiney Road</div>
+                <div class="rmeta"><span class="star">★</span> 4.6 (513) · $$$$ · Thai <button class="see-reviews" data-rid="thai">See reviews</button></div>
+                <div class="price-line">
+                  <span class="disc">🔗 S$0.70</span><span class="off-badge">-25%</span>
+                  <span>44 mins</span>
+                </div>
+              </div>
+            </div>
+            <div class="restaurant-row" tabindex="0">
+              <div class="thumb tj">🍙</div>
+              <div class="info">
+                <div class="rname">Hello Arigato - Cross Street</div>
+                <div class="rmeta"><span class="star">★</span> 4.5 (65) · $$$$ · Japanese <button class="see-reviews" data-rid="arigato">See reviews</button></div>
+                <div class="price-line">
+                  <span class="disc">🔗 S$1.20</span><span class="off-badge">-25%</span>
+                  <span>39 mins</span>
+                </div>
+                <div class="busy-note">⚠ Longer wait, restaurant is busy</div>
+              </div>
+            </div>
+            <div class="restaurant-row" tabindex="0">
+              <div class="thumb ti">🍛</div>
+              <div class="info">
+                <div class="rname">Singapore Banana Leaf Restaurant</div>
+                <div class="rmeta"><span class="star">★</span> 3.8 (469) · $$$$ · Indian <button class="see-reviews" data-rid="banana">See reviews</button></div>
+                <div class="price-line">
+                  <span class="disc">🔗 S$0.90</span><span class="off-badge">-25%</span>
+                  <span>39 mins</span>
+                </div>
+              </div>
+            </div>
+            <div class="restaurant-row" tabindex="0">
+              <div class="thumb to">🍗</div>
+              <div class="info">
+                <div class="rname">Oh My Geprek! - Victoria Street</div>
+                <div class="rmeta"><span class="star">★</span> 4.9 (21) · $$$$ · Indonesian <button class="see-reviews" data-rid="geprek">See reviews</button></div>
+                <div class="price-line">
+                  <span class="disc">🔗 S$2.30</span><span class="off-badge">-25%</span>
+                  <span>41 mins</span>
+                </div>
+              </div>
+            </div>
+            <div class="restaurant-row" tabindex="0">
+              <div class="thumb tp">🥗</div>
+              <div class="info">
+                <div class="rname">Pop Thai - Funan</div>
+                <div class="rmeta">$$$$ · Thai</div>
+                <div class="price-line">
+                  <span class="disc">🔗 S$3.00</span><span class="off-badge">-25%</span>
+                  <span>39 mins</span>
+                </div>
+              </div>
+            </div>
+            <div class="restaurant-row" tabindex="0">
+              <div class="thumb tk">🍗</div>
+              <div class="info">
+                <div class="rname">Kyochon Chicken - Suntec City</div>
+                <div class="rmeta"><span class="star">★</span> 4.4 (208) · $$$$ · Korean <button class="see-reviews" data-rid="kyochon">See reviews</button></div>
+                <div class="price-line">
+                  <span class="disc">🔗 S$2.60</span><span class="off-badge">-25%</span>
+                  <span>42 mins</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trust-footer">
+            Delivered via Grab Pte Ltd · <a href="#" id="footerHelp">Help &amp; Support</a> · <a href="#" id="footerTerms">Terms apply</a>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             REVIEWS OVERLAY (Verifiability) — sits above the home screen
+             ==================================================================== -->
+        <div class="reviews-overlay" id="reviewsOverlay">
+          <div class="reviews-sheet">
+            <h3 id="rvTitle">Reviews</h3>
+            <div class="rv-sub" id="rvSub">★ 4.7 · 122 ratings</div>
+            <div id="rvList"></div>
+            <button class="rv-close" id="rvClose">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   SCREEN STACK — simple push/pop navigation between the 3 screens
+   ========================================================================== */
+let navStack = ["screen-confirm"];
+let currentAddress = { name: "School (Campus)", sub: "51 Stamford Rd, Singapore 178895" };
+/* the pending selection made on the Change Address screen, applied to whichever
+   screen (confirm) the user lands on next — mirrors "any address change forces re-confirmation" */
+let returnTo = "screen-confirm";
+
+function showScreen(id, direction){
+  const current = document.querySelector(".screen.active");
+  const next = document.getElementById(id);
+  if (current === next) return;
+  next.style.transition = "none";
+  next.style.transform = direction === "back" ? "translateX(-100%)" : "translateX(100%)";
+  next.classList.add("active");
+  void next.offsetWidth;
+  next.style.transition = "";
+  requestAnimationFrame(() => {
+    next.style.transform = "translateX(0)";
+    if (current) current.style.transform = direction === "back" ? "translateX(100%)" : "translateX(-100%)";
+  });
+  setTimeout(() => {
+    if (current){ current.classList.remove("active"); current.style.transform = ""; }
+  }, 340);
+}
+
+function pushScreen(id){ navStack.push(id); showScreen(id, "forward"); }
+function popScreen(){ if (navStack.length > 1){ navStack.pop(); showScreen(navStack[navStack.length - 1], "back"); } }
+function resetTo(id, direction){ navStack = [id]; showScreen(id, direction); }
+
+/* ==========================================================================
+   ADDRESS STATE — kept in sync across all three screens
+   ========================================================================== */
+function renderConfirmScreen(){
+  document.getElementById("confirmAddrName").textContent = currentAddress.name;
+  document.getElementById("confirmAddrSub").textContent = currentAddress.sub;
+}
+function renderHomeScreen(){
+  document.getElementById("homeAddrName").textContent = currentAddress.name;
+  document.getElementById("homeFlashTitle").textContent = `25% off near ${currentAddress.name}`;
+}
+function renderAddressList(){
+  document.querySelectorAll(".addr-item").forEach(item => {
+    const isCurrent = item.dataset.name === currentAddress.name;
+    item.classList.toggle("is-current", isCurrent);
+    item.querySelector(".addr-item-check").textContent = isCurrent ? "✓" : "";
+  });
+}
+
+/* ==========================================================================
+   WIRING
+   ========================================================================== */
+document.getElementById("btnChangeFromConfirm").addEventListener("click", () => {
+  renderAddressList();
+  pushScreen("screen-change");
+});
+document.getElementById("homeAddressBlock").addEventListener("click", () => {
+  renderAddressList();
+  pushScreen("screen-change");
+});
+document.getElementById("btnChangeBack").addEventListener("click", popScreen);
+
+document.querySelectorAll(".addr-item").forEach(item => {
+  item.addEventListener("click", () => {
+    currentAddress = { name: item.dataset.name, sub: item.dataset.sub };
+    renderConfirmScreen();
+    /* selecting a new address always re-opens the confirmation gate,
+       regardless of whether Change was reached from Confirm or Home */
+    resetTo("screen-confirm", "back");
+  });
+});
+
+document.getElementById("btnConfirm").addEventListener("click", () => {
+  renderHomeScreen();
+  resetTo("screen-home", "forward");
+});
+
+document.querySelectorAll(".restaurant-row").forEach(row => {
+  row.addEventListener("click", (e) => {
+    if (e.target.closest(".see-reviews")) return; /* handled separately */
+    console.log("Open restaurant:", row.querySelector(".rname").textContent);
+  });
+  row.addEventListener("keydown", e => {
+    if ((e.key === "Enter" || e.key === " ") && !e.target.closest(".see-reviews")){ e.preventDefault(); row.click(); }
+  });
+});
+
+/* ==========================================================================
+   COUNTDOWN — tied to a real, disclosed daily cutoff (6:00pm), not a fake
+   per-load timer. Recomputed from the actual clock, so it reads the same
+   remaining time no matter how many times the screen is reloaded.
+   ========================================================================== */
+(function(){
+  const segHr = document.getElementById("segHr");
+  const segMin = document.getElementById("segMin");
+  const label = document.getElementById("countdownLabel");
+
+  function getCutoff(now){
+    const cutoff = new Date(now);
+    cutoff.setHours(18, 0, 0, 0);
+    if (now >= cutoff) cutoff.setDate(cutoff.getDate() + 1);
+    return cutoff;
+  }
+  function tick(){
+    const now = new Date();
+    const cutoff = getCutoff(now);
+    const diffMin = Math.max(0, Math.floor((cutoff - now) / 60000));
+    const h = Math.floor(diffMin / 60);
+    const m = diffMin % 60;
+    segHr.textContent = String(h).padStart(2, "0");
+    segMin.textContent = String(m).padStart(2, "0");
+    label.textContent = "Ends 6:00pm today · resets daily · applies to this order only";
+  }
+  tick();
+  setInterval(tick, 30000);
+})();
+
+/* ==========================================================================
+   ADDRESS SEARCH — live filter (was previously a disabled, non-functional input)
+   ========================================================================== */
+document.getElementById("addrSearch").addEventListener("input", (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll(".addr-item").forEach(item => {
+    const text = (item.dataset.name + " " + item.dataset.sub).toLowerCase();
+    item.style.display = text.includes(q) ? "" : "none";
+  });
+});
+
+/* ==========================================================================
+   REVIEWS OVERLAY — Verifiability: lets users check the rating claim
+   ========================================================================== */
+const reviewsData = {
+  wunder: { title: "Oh Wunder - Bras Basah Complex", sub: "★ 4.7 · 122 ratings", items: [
+    { who: "Mei L.", text: "Consistent quality, delivery was on time." },
+    { who: "Rahim K.", text: "Portion could be bigger but taste is great." }
+  ]},
+  thai: { title: "87 Just Thai - Killiney Road", sub: "★ 4.6 · 513 ratings", items: [
+    { who: "Wei Jie", text: "My go-to for tom yum, never disappoints." },
+    { who: "Anita S.", text: "Fast delivery, food still hot." }
+  ]},
+  arigato: { title: "Hello Arigato - Cross Street", sub: "★ 4.5 · 65 ratings", items: [
+    { who: "Daniel T.", text: "Busy hours mean longer wait, worth it though." },
+    { who: "Priya R.", text: "Fresh ingredients, will order again." }
+  ]},
+  banana: { title: "Singapore Banana Leaf Restaurant", sub: "★ 3.8 · 469 ratings", items: [
+    { who: "Farid A.", text: "Authentic taste, generous banana leaf portions." },
+    { who: "Grace H.", text: "A bit spicier than expected, ask for mild." }
+  ]},
+  geprek: { title: "Oh My Geprek! - Victoria Street", sub: "★ 4.9 · 21 ratings", items: [
+    { who: "Budi S.", text: "Crispy and spicy exactly as described." },
+    { who: "Nadia P.", text: "Small stall but the sambal is excellent." }
+  ]},
+  kyochon: { title: "Kyochon Chicken - Suntec City", sub: "★ 4.4 · 208 ratings", items: [
+    { who: "Hana Y.", text: "Honey sauce wings are worth the trip." },
+    { who: "Marcus L.", text: "Slightly long wait but always fresh out of the fryer." }
+  ]}
+};
+const reviewsOverlay = document.getElementById("reviewsOverlay");
+document.querySelectorAll(".see-reviews").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const data = reviewsData[btn.dataset.rid];
+    if (!data) return;
+    document.getElementById("rvTitle").textContent = data.title;
+    document.getElementById("rvSub").textContent = data.sub;
+    document.getElementById("rvList").innerHTML = data.items
+      .map(r => `<div class="rv-item"><b>${r.who}</b>${r.text}</div>`).join("");
+    reviewsOverlay.classList.add("show");
+  });
+});
+document.getElementById("rvClose").addEventListener("click", () => reviewsOverlay.classList.remove("show"));
+
+document.getElementById("footerHelp").addEventListener("click", e => e.preventDefault());
+document.getElementById("footerTerms").addEventListener("click", e => e.preventDefault());
+</script>
+</body>
+</html>

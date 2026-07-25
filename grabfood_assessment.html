@@ -1,0 +1,540 @@
+<title>GrabFood Prototype — PSD & Legal Assessment</title>
+<style>
+  :root{
+    --bg:#f5f6f3;
+    --surface:#ffffff;
+    --ink:#1b211d;
+    --muted:#5c655e;
+    --line:#dde2dc;
+    --accent:#0f6e5c;
+    --accent-soft:#e3efe9;
+    --good:#2f8f5b;
+    --good-soft:#e5f3ea;
+    --bad:#b3492f;
+    --bad-soft:#faeae5;
+    --warn:#b8860b;
+    --warn-soft:#faf2df;
+    --shadow: 0 1px 2px rgba(20,30,25,.04), 0 8px 24px rgba(20,30,25,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#141815;
+      --surface:#1b201c;
+      --ink:#e9ece8;
+      --muted:#9aa39a;
+      --line:#2b322c;
+      --accent:#4fb89b;
+      --accent-soft:#1e2e28;
+      --good:#5cbf8a;
+      --good-soft:#1d2e24;
+      --bad:#e08268;
+      --bad-soft:#332420;
+      --warn:#e0b955;
+      --warn-soft:#332a1a;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#141815; --surface:#1b201c; --ink:#e9ece8; --muted:#9aa39a; --line:#2b322c;
+    --accent:#4fb89b; --accent-soft:#1e2e28; --good:#5cbf8a; --good-soft:#1d2e24;
+    --bad:#e08268; --bad-soft:#332420; --warn:#e0b955; --warn-soft:#332a1a;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"]{
+    --bg:#f5f6f3; --surface:#ffffff; --ink:#1b211d; --muted:#5c655e; --line:#dde2dc;
+    --accent:#0f6e5c; --accent-soft:#e3efe9; --good:#2f8f5b; --good-soft:#e5f3ea;
+    --bad:#b3492f; --bad-soft:#faeae5; --warn:#b8860b; --warn-soft:#faf2df;
+    --shadow: 0 1px 2px rgba(20,30,25,.04), 0 8px 24px rgba(20,30,25,.05);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family: -apple-system, "Segoe UI", "IBM Plex Sans", system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  ::selection{ background:var(--accent-soft); }
+
+  h1,h2,h3{
+    font-family: Georgia, "Iowan Old Style", "Source Serif Pro", ui-serif, serif;
+    font-weight:600;
+    text-wrap:balance;
+    color:var(--ink);
+    margin:0;
+  }
+  .mono, .num{ font-variant-numeric: tabular-nums; font-feature-settings:"tnum" 1; }
+  code, .tag-mono{ font-family: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, monospace; }
+
+  a{ color:var(--accent); }
+
+  .shell{
+    max-width:1180px;
+    margin:0 auto;
+    padding:48px 32px 96px;
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    gap:56px;
+  }
+  @media (max-width: 860px){
+    .shell{ grid-template-columns: 1fr; }
+    .sidenav{ position:static !important; order:2; }
+  }
+
+  .sidenav{
+    position:sticky; top:48px; align-self:start;
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .sidenav .brand{
+    font-family: Georgia, serif;
+    font-size:1.05rem;
+    font-weight:600;
+    margin-bottom:18px;
+    letter-spacing:.01em;
+  }
+  .sidenav .brand small{
+    display:block; font-family: -apple-system, sans-serif; font-weight:500;
+    font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-top:3px;
+  }
+  .sidenav a{
+    color:var(--muted);
+    text-decoration:none;
+    font-size:.86rem;
+    padding:6px 0;
+    border-left:2px solid transparent;
+    padding-left:10px;
+    margin-left:-11px;
+    transition: color .15s, border-color .15s;
+  }
+  .sidenav a:hover{ color:var(--ink); border-left-color:var(--line); }
+
+  header.hero{
+    grid-column:2;
+    margin-bottom:8px;
+  }
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.11em;
+    font-size:.72rem;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  h1.title{ font-size:2.15rem; line-height:1.15; max-width:20ch; }
+  .subtitle{ color:var(--muted); max-width:62ch; margin-top:14px; font-size:1.02rem; }
+
+  section{ margin-top:56px; scroll-margin-top:32px; }
+  section > h2{
+    font-size:1.3rem;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:22px;
+  }
+  section > h2 .h2-sub{
+    display:block; font-family:-apple-system,sans-serif; font-weight:500; font-size:.78rem;
+    color:var(--muted); text-transform:none; letter-spacing:0; margin-top:4px;
+  }
+
+  /* stat strip */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  @media (max-width:640px){ .stats{ grid-template-columns:repeat(2,1fr); } }
+  .stat{
+    background:var(--surface);
+    padding:20px 18px;
+  }
+  .stat .n{ font-size:1.9rem; font-weight:600; font-family:Georgia,serif; }
+  .stat .l{ font-size:.78rem; color:var(--muted); margin-top:4px; }
+  .stat.accent .n{ color:var(--accent); }
+
+  /* category bars */
+  .catbars{ display:flex; flex-direction:column; gap:14px; margin-top:24px; }
+  .catbar-row{ display:grid; grid-template-columns:180px 1fr 64px; align-items:center; gap:14px; }
+  @media (max-width:600px){ .catbar-row{ grid-template-columns:110px 1fr 44px; font-size:.85rem;} }
+  .catbar-row .name{ font-size:.88rem; font-weight:600; }
+  .catbar-track{ height:10px; border-radius:6px; background:var(--line); overflow:hidden; }
+  .catbar-fill{ height:100%; background:var(--accent); border-radius:6px; }
+  .catbar-row .frac{ font-size:.82rem; color:var(--muted); text-align:right; }
+
+  /* pills */
+  .pill{
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:.72rem; font-weight:600; letter-spacing:.02em;
+    padding:3px 9px; border-radius:20px; white-space:nowrap;
+  }
+  .pill.yes{ background:var(--good-soft); color:var(--good); }
+  .pill.no{ background:var(--bad-soft); color:var(--bad); }
+  .pill.high{ background:var(--bad-soft); color:var(--bad); }
+  .pill.medium{ background:var(--warn-soft); color:var(--warn); }
+  .pill.low{ background:var(--good-soft); color:var(--good); }
+  .pill.none{ background:var(--accent-soft); color:var(--accent); }
+  .pill.na{ background:var(--line); color:var(--muted); }
+
+  /* principle cards grouped by category */
+  .cat-group{ margin-bottom:36px; }
+  .cat-group:last-child{ margin-bottom:0; }
+  .cat-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:12px;
+  }
+  .cat-head h3{ font-size:1.02rem; }
+  .cat-head .cat-score{ font-size:.82rem; color:var(--muted); }
+
+  .principle{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+    margin-bottom:10px;
+    box-shadow: var(--shadow);
+  }
+  .principle .row1{
+    display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  }
+  .principle .pname{ font-weight:600; font-size:.96rem; }
+  .principle .pdesc{ color:var(--muted); font-size:.84rem; margin-top:3px; }
+  .principle .pjust{ font-size:.88rem; margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); }
+  .principle .precon{
+    font-size:.78rem; color:var(--warn); margin-top:8px;
+    background:var(--warn-soft); padding:6px 10px; border-radius:6px; display:inline-block;
+  }
+
+  /* legal table */
+  .table-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); }
+  table{ border-collapse:collapse; width:100%; min-width:640px; background:var(--surface); }
+  th, td{ text-align:left; padding:12px 16px; font-size:.88rem; vertical-align:top; }
+  thead th{
+    background:var(--accent-soft); color:var(--accent);
+    font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; font-weight:700;
+    border-bottom:1px solid var(--line);
+  }
+  tbody tr + tr td{ border-top:1px solid var(--line); }
+  tbody td:first-child{ font-weight:600; }
+  td .risk-line{ display:flex; flex-direction:column; gap:4px; align-items:flex-start; }
+  td .risk-line span.detail{ color:var(--muted); font-size:.82rem; }
+
+  .callout{
+    background:var(--accent-soft);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:8px;
+    padding:16px 20px;
+    font-size:.92rem;
+  }
+  .callout h4{ margin:0 0 8px; font-size:.9rem; font-family:-apple-system,sans-serif; font-weight:700; color:var(--accent); }
+  .callout ul{ margin:0; padding-left:18px; }
+  .callout li{ margin-bottom:6px; }
+  .callout li:last-child{ margin-bottom:0; }
+
+  footer{
+    grid-column:2;
+    margin-top:64px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    color:var(--muted);
+    font-size:.8rem;
+  }
+</style>
+
+<div class="shell">
+  <nav class="sidenav">
+    <div class="brand">GrabFood Review<small>Assessment digest</small></div>
+    <a href="#overview">Overview</a>
+    <a href="#categories">Score by category</a>
+    <a href="#primary-task">Primary Task Support</a>
+    <a href="#dialogue">Dialogue Support</a>
+    <a href="#credibility">System Credibility</a>
+    <a href="#social">Social Support</a>
+    <a href="#legal">Legal risk review</a>
+    <a href="#reconciliation">Reconciliation notes</a>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">Persuasive Systems Design · Legal Review</div>
+    <h1 class="title">GrabFood prototype, assessed against 28 PSD principles and 6 legal risk vectors</h1>
+    <p class="subtitle">A structured read of the ordering flow — address confirmation through checkout — scored against the Oinas-Kukkonen &amp; Harjumaa Persuasive Systems Design framework, reconciled against a prior manual audit, and cross-checked for manipulation and coercion risk.</p>
+  </header>
+
+  <main style="grid-column:2;">
+
+    <section id="overview">
+      <h2>Overview</h2>
+      <div class="stats">
+        <div class="stat accent"><div class="n num">28</div><div class="l">Principles evaluated</div></div>
+        <div class="stat"><div class="n num">10</div><div class="l">Met (Yes)</div></div>
+        <div class="stat"><div class="n num">18</div><div class="l">Not met (No)</div></div>
+        <div class="stat"><div class="n num">36%</div><div class="l">Overall met rate</div></div>
+      </div>
+    </section>
+
+    <section id="categories">
+      <h2>Score by category</h2>
+      <div class="catbars">
+        <div class="catbar-row">
+          <div class="name">Primary Task Support</div>
+          <div class="catbar-track"><div class="catbar-fill" style="width:57%"></div></div>
+          <div class="frac num">4 / 7</div>
+        </div>
+        <div class="catbar-row">
+          <div class="name">Dialogue Support</div>
+          <div class="catbar-track"><div class="catbar-fill" style="width:43%"></div></div>
+          <div class="frac num">3 / 7</div>
+        </div>
+        <div class="catbar-row">
+          <div class="name">System Credibility</div>
+          <div class="catbar-track"><div class="catbar-fill" style="width:43%"></div></div>
+          <div class="frac num">3 / 7</div>
+        </div>
+        <div class="catbar-row">
+          <div class="name">Social Support</div>
+          <div class="catbar-track"><div class="catbar-fill" style="width:0%"></div></div>
+          <div class="frac num">0 / 7</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="primary-task">
+      <h2>Primary Task Support<span class="h2-sub">Helping the user get the core task — ordering food — done efficiently. 4 of 7 met.</span></h2>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Reduction</div><div class="pdesc">Simplify complex tasks by reducing steps or decisions.</div></div><span class="pill yes">Yes</span></div>
+        <div class="pjust">Address selection is one tap on a saved address card rather than typing or searching. Counterpoint: the mandatory confirm-then-browse gate still adds a step at the flow level even as address entry itself is simplified.</div>
+        <div class="precon">Manual audit said No</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Tunneling</div><div class="pdesc">Guide users through a predefined sequence toward a goal.</div></div><span class="pill yes">Yes</span></div>
+        <div class="pjust">Navigation logic hard-gates the flow: address confirmation always precedes browsing, and any address change resets the stack back to the confirm screen before <code>screen-home</code> is reachable again.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Tailoring</div><div class="pdesc">Provide information or features relevant to the user's needs or context.</div></div><span class="pill yes">Yes</span></div>
+        <div class="pjust">Restaurant list and promo copy are scoped to the confirmed address — "We'll only show restaurants, delivery fees, and delivery times for this address" — and the flash-sale title reads the current address name dynamically. Context-based adaptation, distinct from identity-based Personalization.</div>
+        <div class="precon">Manual audit said No</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Personalization</div><div class="pdesc">Customize the system experience for individual users.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">The three saved addresses (School, Home, Office) are static hardcoded data, not derived from user history or behavior. Nothing adapts to who the specific user is beyond location context — that's Tailoring, not Personalization.</div>
+        <div class="precon">Manual audit said Yes (location-based) — attributed to Tailoring instead</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Self-monitoring</div><div class="pdesc">Allow users to track their own progress.</div></div><span class="pill yes">Yes</span></div>
+        <div class="pjust">The min-spend widget shows explicit progress toward a goal — "S$8.60 more to unlock 25% off (S$3.40 of S$12.00)" — backed by a progress bar rendered at 28% width.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Simulation</div><div class="pdesc">Show cause-and-effect between actions and outcomes.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">No feature previews an outcome (e.g. "if you add $X, here's your new total or ETA") — the progress bar reports current state only, not a simulated result.</div>
+        <div class="precon">Manual audit marked Yes but flagged "??" (self-identified as uncertain)</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Rehearsal</div><div class="pdesc">Allow users to practice a target behavior before performing it for real.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">No practice or sandbox mode exists; ordering food has no rehearsal analog in this prototype.</div>
+        <div class="precon">Manual audit marked Yes but flagged "??" (self-identified as uncertain)</div>
+      </div>
+    </section>
+
+    <section id="dialogue">
+      <h2>Dialogue Support<span class="h2-sub">Feedback and interaction quality between system and user. 3 of 7 met.</span></h2>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Praise</div><div class="pdesc">Provide positive feedback for desired actions.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">No copy acknowledges a completed user action. The progress bar is a static 28% width with no wiring that fires a message when the spend threshold is reached — nothing dynamic exists in the current build.</div>
+        <div class="precon">Manual audit said Yes ("when amount reaches limit") — describes intended behavior not present in the static prototype</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Rewards</div><div class="pdesc">Offer incentives or recognition for desired behaviors.</div></div><span class="pill yes">Yes</span></div>
+        <div class="pjust">The flash banner offers a tangible incentive — 25% off — tied directly to completing an order, with per-item discounted prices shown against a struck-through original.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Reminders</div><div class="pdesc">Prompt users to continue or return to an activity.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">The countdown is in-session urgency, not a prompt to return later — there's no push/notification scaffolding. More precisely an urgency mechanic supporting Suggestion.</div>
+        <div class="precon">Manual audit said Yes ("time count down") — attributed to Suggestion instead</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Suggestion</div><div class="pdesc">Recommend actions at appropriate moments.</div></div><span class="pill yes">Yes</span></div>
+        <div class="pjust">The min-spend copy nudges a specific next action — "S$8.60 more to unlock 25% off" — at the moment it's relevant, steering toward a larger cart.</div>
+        <div class="precon">Manual audit said No</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Similarity</div><div class="pdesc">Reflect users' characteristics or preferences.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">Interface doesn't mirror user traits or preferences — no adapted tone, avatar, or language matching the user.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Liking</div><div class="pdesc">Use an attractive, appealing interface to increase engagement.</div></div><span class="pill yes">Yes</span></div>
+        <div class="pjust">Polished, modern visual design — gradient banners, rounded cards, consistent iconography, brand color — aimed at visual appeal. Inherently a perceptual/design-taste judgment.</div>
+        <div class="precon">Manual audit said No (marked "Subjective")</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Social Role</div><div class="pdesc">Adopt the role of a coach, assistant, or advisor.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">No persona (coach, assistant, advisor) is adopted; the UI is transactional, not conversational.</div>
+      </div>
+    </section>
+
+    <section id="credibility">
+      <h2>System Credibility Support<span class="h2-sub">Signals of trustworthiness and competence. 3 of 7 met.</span></h2>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Trustworthiness</div><div class="pdesc">Present honest, unbiased, and reliable information.</div></div><span class="pill yes">Yes</span></div>
+        <div class="pjust">Revised after discussion: the "⚠ Longer wait, restaurant is busy" note is the app volunteering negative information instead of hiding it to protect the sale — a genuine honesty signal.</div>
+        <div class="precon">Manual audit said Yes ("Longer wait message") — confirmed correct, original assessment revised from No</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Expertise</div><div class="pdesc">Demonstrate knowledge and competence in the subject area.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">Nothing demonstrates subject-matter competence — no curation rationale, food-safety info, or expert picks.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Surface Credibility</div><div class="pdesc">Maintain a professional, polished appearance.</div></div><span class="pill yes">Yes</span></div>
+        <div class="pjust">Professional layout, consistent typography and spacing, realistic status bar and phone chrome give it a polished, credible look typical of a shipped app. Inherently a perceptual/design-taste judgment.</div>
+        <div class="precon">Manual audit said No (marked "Subjective")</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Real-World Feel</div><div class="pdesc">Show information about the real people/organization behind it.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">No info about the real company or people behind the app appears on these screens — no "About Grab," no support contact.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Authority</div><div class="pdesc">Reference recognized authorities or institutions.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">No references to recognized institutions, certifications, or regulatory bodies.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Third-Party Endorsements</div><div class="pdesc">Display independent reviews, certifications, or endorsements.</div></div><span class="pill yes">Yes</span></div>
+        <div class="pjust">Star ratings with review counts per restaurant — e.g. "★ 4.7 (122)" — function as crowd-sourced third-party endorsement signals.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Verifiability</div><div class="pdesc">Enable users to verify the accuracy of claims through external sources.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">Ratings and claims aren't linkable or sourced — no way to click through to verify the "4.7 (122)" figure or read the underlying reviews. The rating is a claim, not a checkable one.</div>
+        <div class="precon">Manual audit said Yes ("Reviews") — the count itself isn't a verification mechanism without a drill-down</div>
+      </div>
+    </section>
+
+    <section id="social">
+      <h2>Social Support<span class="h2-sub">Leveraging social influence and connection. 0 of 7 met.</span></h2>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Social Learning</div><div class="pdesc">Allow users to observe and learn from others' behaviors.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">No feature exposes other users' visible choices or behavior — no "customers also ordered," no activity feed. A static review count is not observable behavior.</div>
+        <div class="precon">Manual audit said Yes ("Reviews") — closer to Third-Party Endorsement than Social Learning</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Social Comparison</div><div class="pdesc">Enable users to compare their performance with others.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">No comparison of the user's activity or spend against others.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Normative Influence</div><div class="pdesc">Encourage behavior by showing what others commonly do.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">The "⚠ Longer wait, restaurant is busy" note signals operational status, not social norms ("most people order X") — no explicit norm-based messaging exists.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Social Facilitation</div><div class="pdesc">Increase motivation by showing others performing the same activity.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">No indication of other users currently active or ordering alongside this user.</div>
+        <div class="precon">Manual audit said No (marked "Not live")</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Cooperation</div><div class="pdesc">Encourage users to work together toward shared goals.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">Single-user ordering flow; no shared or group goal mechanic.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Competition</div><div class="pdesc">Motivate users through friendly competition.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">No leaderboard, streak, or competitive framing.</div>
+      </div>
+
+      <div class="principle">
+        <div class="row1"><div><div class="pname">Recognition</div><div class="pdesc">Publicly acknowledge users' achievements or contributions.</div></div><span class="pill no">No</span></div>
+        <div class="pjust">No public acknowledgment of user achievements — no badges, no milestones.</div>
+      </div>
+    </section>
+
+    <section id="legal">
+      <h2>Legal risk review<span class="h2-sub">Six flagged UI mechanics, rated for persuasion, manipulation, and coercion risk.</span></h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Feature</th><th>Persuasion</th><th>Manipulation</th><th>Coercion</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Address confirmation gate</td>
+              <td><div class="risk-line"><span class="pill low">Low</span><span class="detail">Informs, doesn't push</span></div></td>
+              <td><div class="risk-line"><span class="pill none">None</span><span class="detail">Functional gate only</span></div></td>
+              <td><div class="risk-line"><span class="pill none">None</span><span class="detail">No cost to comply</span></div></td>
+            </tr>
+            <tr>
+              <td>Countdown timer</td>
+              <td><div class="risk-line"><span class="pill high">High</span><span class="detail">Urgency framing</span></div></td>
+              <td><div class="risk-line"><span class="pill high">High</span><span class="detail">Resets every load, not tied to a real deadline</span></div></td>
+              <td><div class="risk-line"><span class="pill medium">Medium</span><span class="detail">Pressures faster checkout</span></div></td>
+            </tr>
+            <tr>
+              <td>Struck-through "original" price</td>
+              <td><div class="risk-line"><span class="pill high">High</span><span class="detail">Anchoring effect</span></div></td>
+              <td><div class="risk-line"><span class="pill high">High</span><span class="detail">"Original" price unsubstantiated</span></div></td>
+              <td><div class="risk-line"><span class="pill low">Low</span><span class="detail">No barrier to opting out</span></div></td>
+            </tr>
+            <tr>
+              <td>Min-spend progress bar</td>
+              <td><div class="risk-line"><span class="pill high">High</span><span class="detail">Gamified basket-building</span></div></td>
+              <td><div class="risk-line"><span class="pill medium">Medium</span><span class="detail">Nudges spend beyond intent</span></div></td>
+              <td><div class="risk-line"><span class="pill none">None</span><span class="detail">User still fully in control</span></div></td>
+            </tr>
+            <tr>
+              <td>"Personalised" location discount</td>
+              <td><div class="risk-line"><span class="pill medium">Medium</span><span class="detail">Relevance framing</span></div></td>
+              <td><div class="risk-line"><span class="pill medium">Medium</span><span class="detail">May mask location-based pricing</span></div></td>
+              <td><div class="risk-line"><span class="pill low">Low</span><span class="detail">No forced action</span></div></td>
+            </tr>
+            <tr>
+              <td>Disabled search input</td>
+              <td><div class="risk-line"><span class="pill na">n/a</span></div></td>
+              <td><div class="risk-line"><span class="pill na">n/a</span></div></td>
+              <td><div class="risk-line"><span class="pill na">n/a</span></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="reconciliation">
+      <h2>Reconciliation vs. manual audit</h2>
+      <div class="callout">
+        <h4>13 of 28 items initially disagreed with the manual audit checklist</h4>
+        <ul>
+          <li><strong>1 revised:</strong> Trustworthiness (No → Yes) — the "busy restaurant, longer wait" disclosure is an honest-info signal the original pass missed. Manual audit's call was adopted.</li>
+          <li><strong>12 held after discussion</strong> — the automated assessment's original call was kept, with reasoning recorded per item above: Reduction, Tailoring, Personalization, Simulation, Rehearsal, Praise, Reminders, Suggestion, Liking, Surface Credibility, Verifiability, Social Learning.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Sources: <code>GrabFood_PSD_Assessment.xlsx</code> (PSD Assessment · Summary) and <code>grabfood_legal_review.xlsx</code> (Legal Review).
+  </footer>
+</div>
