@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/grabfood", "destination": "/grabfood-deck.html" },
+    { "source": "/grabfood/", "destination": "/grabfood-deck.html" },
+    { "source": "/grabfood-assessment", "destination": "/grabfood_assessment.html" },
+    { "source": "/grabfood-assessment.html", "destination": "/grabfood_assessment.html" }
+  ]
+}

@@ -1,7 +1,28 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import fs from 'fs';
 import path from 'path';
 import {defineConfig, Plugin} from 'vite';
+
+const getHtmlInputs = () => {
+  const inputs: Record<string, string> = {
+    main: path.resolve(__dirname, 'index.html'),
+  };
+
+  const rootFiles = fs.readdirSync(__dirname);
+  for (const file of rootFiles) {
+    if (file.endsWith('.html')) {
+      const key = file.replace(/\.html$/, '').replace(/[^a-zA-Z0-9]/g, '_');
+      inputs[key] = path.resolve(__dirname, file);
+    }
+  }
+
+  if (fs.existsSync(path.resolve(__dirname, 'grabfood/index.html'))) {
+    inputs['grabfood'] = path.resolve(__dirname, 'grabfood/index.html');
+  }
+
+  return inputs;
+};
 
 const redirectGrabfoodPlugin = (): Plugin => ({
   name: 'redirect-grabfood',
@@ -10,6 +31,11 @@ const redirectGrabfoodPlugin = (): Plugin => ({
       const url = req.url ? req.url.split('?')[0] : '';
       if (url === '/grabfood' || url === '/grabfood/' || url === '/grabfood/index.html') {
         res.writeHead(302, { Location: '/grabfood-deck.html' });
+        res.end();
+        return;
+      }
+      if (url === '/grabfood-assessment' || url === '/grabfood-assessment.html') {
+        res.writeHead(302, { Location: '/grabfood_assessment.html' });
         res.end();
         return;
       }
@@ -35,13 +61,7 @@ export default defineConfig(() => {
     },
     build: {
       rollupOptions: {
-        input: {
-          main: path.resolve(__dirname, 'index.html'),
-          grabfood: path.resolve(__dirname, 'grabfood/index.html'),
-          grabfoodDeck: path.resolve(__dirname, 'grabfood-deck.html'),
-          grabfoodAnalysis: path.resolve(__dirname, 'grabfood-analysis.html'),
-          grabfoodImproved: path.resolve(__dirname, 'grabfood-improved.html'),
-        },
+        input: getHtmlInputs(),
       },
     },
   };
