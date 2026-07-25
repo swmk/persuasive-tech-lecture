@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "xrweuo98fv");
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GrabFood – Prototype v2 (PSD + Legal revisions)</title>
@@ -541,8 +534,10 @@ html,body{
    ========================================================================== */
 let navStack = ["screen-confirm"];
 let currentAddress = { name: "School (Campus)", sub: "51 Stamford Rd, Singapore 178895" };
-/* the pending selection made on the Change Address screen, applied to whichever
-   screen (confirm) the user lands on next — mirrors "any address change forces re-confirmation" */
+/* where "Change" was opened from: reaching it from the first-run confirm gate
+   returns to that gate (address hasn't been confirmed yet); reaching it from
+   Home (already confirmed, already browsing) returns straight to Home instead
+   of re-forcing the confirm step the user already completed */
 let returnTo = "screen-confirm";
 
 function showScreen(id, direction){
@@ -590,10 +585,12 @@ function renderAddressList(){
    WIRING
    ========================================================================== */
 document.getElementById("btnChangeFromConfirm").addEventListener("click", () => {
+  returnTo = "screen-confirm";
   renderAddressList();
   pushScreen("screen-change");
 });
 document.getElementById("homeAddressBlock").addEventListener("click", () => {
+  returnTo = "screen-home";
   renderAddressList();
   pushScreen("screen-change");
 });
@@ -603,9 +600,12 @@ document.querySelectorAll(".addr-item").forEach(item => {
   item.addEventListener("click", () => {
     currentAddress = { name: item.dataset.name, sub: item.dataset.sub };
     renderConfirmScreen();
-    /* selecting a new address always re-opens the confirmation gate,
-       regardless of whether Change was reached from Confirm or Home */
-    resetTo("screen-confirm", "back");
+    renderHomeScreen();
+    /* changing address from the first-run gate returns to that gate (still
+       needs confirming); changing it from Home returns straight to Home —
+       the user already confirmed once and shouldn't be forced through the
+       gate again just to update where they're browsing from */
+    resetTo(returnTo, "back");
   });
 });
 
